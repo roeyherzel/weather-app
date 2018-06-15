@@ -5,7 +5,11 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 
 export default {
-    entry: './src/index.js',
+    entry: [
+        'babel-polyfill',
+        'whatwg-fetch',
+        './src/index.js',
+    ],
 
     resolve: {
         extensions: ['.js', '.jsx']
