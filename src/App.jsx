@@ -1,10 +1,10 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
 
-import HelloWorld from './HelloWorld';
+import Location from './containers/Location';
 
 
-const App = () => <HelloWorld/>;
+const App = () => <Location />;
 
 
 export default hot(module)(App);

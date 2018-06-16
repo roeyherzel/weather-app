@@ -1,0 +1,59 @@
+{
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+          "jsx": true
+        }
+    },
+    "extends": [
+        "airbnb"
+    ],
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "max-len": ["warn", {
+          "code": 120,
+          "ignoreTemplateLiterals": true,
+          "ignoreStrings": true,
+          "ignoreTrailingComments": true,
+          "ignoreComments": true,
+          "ignoreRegExpLiterals": true
+        }],
+        "padded-blocks": "off",
+        "camelcase": "off",
+        "indent": ["error", 4, { "SwitchCase": 1 }],
+        "consistent-return": "off",
+        "radix": ["error", "as-needed"],
+        "prefer-promise-reject-errors": "off",
+        "no-mixed-operators": ["error", { "allowSamePrecedence": true }],
+
+        "no-underscore-dangle": "off",
+        "no-plusplus": "off",
+        "no-shadow": "off",
+        "no-param-reassign": "off",
+        "no-use-before-define": ["error", { "functions": false, "classes": true }],
+
+        "import/no-extraneous-dependencies": 0,
+        "import/first": "off",
+        "import/prefer-default-export": "false",
+
+        "jsx-a11y/anchor-is-valid": [ "warn", { "components": [ "a" ] }],
+        "jsx-a11y/label-has-for": [ "error", { "required": { "some": [ "nesting", "id" ] }}],
+
+        "react/jsx-curly-spacing": ["error", { "when": "never", "children": { "when": "always" } }],
+        "react/jsx-indent": ["error", 4],
+        "react/jsx-indent-props": ["error", 4],
+        "react/jsx-filename-extension": 0,
+        "react/forbid-prop-types": "off",
+        "react/no-typos": "off",
+        "react/require-default-props": "off",
+        "react/prop-types": "warn"
+      }
+}
