@@ -109,7 +109,7 @@ const Location = ({
                     { city }, { country }
                     <Header.Subheader>
                         <Description>
-                            { moment(dt).format('dddd MMM Do') }, { description }
+                            { description }
                         </Description>
                     </Header.Subheader>
                 </Header>
