@@ -7,8 +7,8 @@ import WeatherIcon from './WeathIcon';
 
 
 const Container = styled.div`
-    width: 400px;
-    margin: 6rem;
+    width: 375px;
+    margin: 1rem;
 `;
 
 const HeaderRow = styled.div`
@@ -24,10 +24,12 @@ const Description = styled.div`
 const Weather = styled.div`
     display: flex;
     align-items: center;
+    margin-top: 0.5rem;
 `;
 
 const IconCondition = styled(WeatherIcon)`
-    font-size: 3.5rem;
+    font-size: 3rem;
+    margin: 0 0.5rem;
 `;
 
 const IconCelsius = styled(WeatherIcon).attrs({
@@ -49,13 +51,19 @@ const IconMoonrise = styled(IconSunrise).attrs({
 })`
 `;
 
+const IconThermometer = styled(IconSunrise).attrs({
+    name: 'thermometer',
+})`
+`;
+
+
 const IconGroup = styled.div`
     align-self: flex-end;
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 1rem;
-    line-height: 1.2;
+    line-height: 1.4;
 `;
 
 const IconGroupLeft = styled.div`
@@ -79,11 +87,15 @@ const Temp = styled.span`
     font-size: 3rem;
 `;
 
+const TempHighLow = styled.div`
+    align-self: flex-end;
+`;
+
 const TempLow = styled.span`
     color: ${p => p.theme.color.gray};
 `;
 
-const TempHeigh = styled.span`
+const TempHigh = styled.span`
 `;
 
 const Location = ({
@@ -114,16 +126,25 @@ const Location = ({
                     </Header.Subheader>
                 </Header>
 
-                <TempContainer>
-                    <Temp>{ temp }</Temp>
-                    <IconCelsius />
-                </TempContainer>
+                <Label size="big" basic>{ moment(dt).format('ddd, h:mm A') }</Label>
 
             </HeaderRow>
             <Weather>
-                <Label size="big" basic>{ moment(dt).format('hh:mm A') }</Label>
+                <TempContainer>
+                    <Temp>{ temp }</Temp>
+                    <IconCelsius />
+                    <IconCondition id={weatherId} icon={icon} />
+                </TempContainer>
+
 
                 <IconGroupLeft>
+                    <IconGroup>
+                        <IconThermometer />
+                        <TempHighLow>
+                            <TempHigh>{ temp_max }&deg;</TempHigh>&nbsp;<TempLow>{ temp_min }&deg;</TempLow>
+                        </TempHighLow>
+                    </IconGroup>
+
                     <IconGroup>
                         <IconSunrise />
                         { moment(sunrise).format('h:mm') }
@@ -132,12 +153,6 @@ const Location = ({
                     <IconGroup>
                         <IconMoonrise />
                         { moment(sunset).format('h:mm') }
-                    </IconGroup>
-                    <IconGroup>
-                        <IconCondition id={weatherId} icon={icon} />
-                        <div>
-                            <TempHeigh>{ temp_max }&deg;</TempHeigh>&nbsp;<TempLow>{ temp_min }&deg;</TempLow>
-                        </div>
                     </IconGroup>
                 </IconGroupLeft>
             </Weather>
