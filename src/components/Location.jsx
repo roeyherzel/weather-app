@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
-import { Segment, Header, Statistic, Icon } from 'semantic-ui-react';
+import { Segment, Header, Statistic, Label } from 'semantic-ui-react';
 
 import WeatherIcon from './WeathIcon';
 
@@ -18,9 +18,6 @@ const TitleRow = styled.div`
 
 const Description = styled.div`
     text-transform: capitalize;
-    text-align: center;
-    line-height: 1.5;
-    color: rgba(0,0,0,.6);
 `;
 
 const Weather = styled.div`
@@ -54,11 +51,14 @@ const Location = ({
 }) => (
     <Container>
         <Segment>
+            <Label color="teal" attached="top">{ moment(dt).format('dddd h:mm a') }</Label>
             <TitleRow>
-                <Header as="h1">
+                <Header as="h2">
                     { city }, { country }
                     <Header.Subheader>
-                        { moment(dt).format('dddd h:mm a') }
+                        <Description>
+                            { description }
+                        </Description>
                     </Header.Subheader>
                 </Header>
 
@@ -70,9 +70,6 @@ const Location = ({
                             <WeatherIcon name="celsius" size="2rem" />
                         </TempContainer>
                     </Weather>
-                    <Description>
-                        { description }
-                    </Description>
                 </div>
             </TitleRow>
 
