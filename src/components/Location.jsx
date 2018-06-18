@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
-import { Segment, Header, Statistic, Label } from 'semantic-ui-react';
+import { Segment, Header, Label } from 'semantic-ui-react';
 
 import WeatherIcon from './WeathIcon';
 
@@ -11,8 +11,9 @@ const Container = styled.div`
     margin: 6rem;
 `;
 
-const TitleRow = styled.div`
+const HeaderRow = styled.div`
     display: flex;
+    align-items: flex-start;
     justify-content: space-between;
 `;
 
@@ -22,18 +23,45 @@ const Description = styled.div`
 
 const Weather = styled.div`
     display: flex;
+    margin-top: 0.5rem;
+`;
+
+const IconCondition = styled(WeatherIcon)`
+    font-size: 3rem;
+`;
+
+const IconCelsius = styled(WeatherIcon).attrs({
+    name: 'celsius',
+})`
+    align-self: self-start;
+    font-size: 2rem;
+    margin-left: 4px;
 `;
 
 const TempContainer = styled.div`
     display: flex;
-    font-size: 3rem;
-    margin-left: 0.5rem;
+    margin-right: 1rem;
+`;
+
+const TempGroup = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1rem;
+    line-height: 1.2;
 `;
 
 const Temp = styled.span`
     line-height: 1;
+    font-size: 3rem;
 `;
 
+const TempLow = styled.span`
+    color: ${p => p.theme.color.gray};
+`;
+
+const TempHeigh = styled.span`
+`;
 
 const Location = ({
     dt,
@@ -47,13 +75,13 @@ const Location = ({
     },
     wind,
     temp,
-    humidity,
+    temp_max,
+    temp_min,
 }) => (
     <Container>
         <Segment>
-            <Label color="teal" attached="top">{ moment(dt).format('dddd h:mm a') }</Label>
-            <TitleRow>
-                <Header as="h2">
+            <HeaderRow>
+                <Header as="h3">
                     { city }, { country }
                     <Header.Subheader>
                         <Description>
@@ -62,17 +90,20 @@ const Location = ({
                     </Header.Subheader>
                 </Header>
 
-                <div>
-                    <Weather>
-                        <WeatherIcon id={weatherId} icon={icon} size="3rem" />
-                        <TempContainer>
-                            <Temp>{ temp }</Temp>
-                            <WeatherIcon name="celsius" size="2rem" />
-                        </TempContainer>
-                    </Weather>
-                </div>
-            </TitleRow>
-
+                <Label size="big" basic>{ moment(dt).format('ddd hh:mm A') }</Label>
+            </HeaderRow>
+            <Weather>
+                <TempContainer>
+                    <Temp>{ temp }</Temp>
+                    <IconCelsius />
+                </TempContainer>
+                <TempGroup>
+                    <IconCondition id={weatherId} icon={icon} />
+                    <div>
+                        <TempHeigh>{ temp_max }&deg;</TempHeigh>&nbsp;<TempLow>{ temp_min }&deg;</TempLow>
+                    </div>
+                </TempGroup>
+            </Weather>
         </Segment>
 
 

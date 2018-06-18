@@ -4,8 +4,10 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
+import { ThemeProvider } from 'styled-components';
 
 import 'semantic-ui-css/semantic.min.css';
+import theme from './styles/theme';
 
 import App from './App';
 
@@ -16,7 +18,9 @@ const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunkMid
 
 render(
     <Provider store={store}>
-        <App />
+        <ThemeProvider theme={theme}>
+            <App />
+        </ThemeProvider>
     </Provider>
     , document.getElementById('root'),
 );

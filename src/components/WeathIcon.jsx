@@ -1,18 +1,19 @@
 import React from 'react';
+import styled from 'styled-components';
 import '../openWeather/css/weather-icons.min.css';
 import { getWeatherIcon } from '../openWeather';
 
 
-const WeatherIcon = ({
-    id, icon, name, size,
-}) => {
-    const iconPrefix = 'wi wi-';
-    const iconName = name || getWeatherIcon(id, icon);
-    const style = {
-        fontSize: size || '1rem',
-    };
+const Icon = styled.i`
+`;
 
-    return <i style={style} className={iconPrefix + iconName} />;
+const WeatherIcon = ({
+    id, icon, name, className,
+}) => {
+    const iconPrefix = `${className} wi wi-`;
+    const iconName = name || getWeatherIcon(id, icon);
+
+    return <Icon className={iconPrefix + iconName} />;
 };
 
 export default WeatherIcon;
