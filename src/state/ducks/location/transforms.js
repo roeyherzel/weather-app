@@ -16,6 +16,8 @@ export const transformWeather = (data) => {
         rain,
         sys: {
             country,
+            sunrise,
+            sunset,
         },
         weather: _weather,
     } = data;
@@ -35,5 +37,7 @@ export const transformWeather = (data) => {
         temp_max: parseInt(temp_max),
         temp_min: parseInt(temp_min),
         weather,
+        sunrise,
+        sunset,
     });
 };
