@@ -13,6 +13,7 @@ export const transformWeather = (data) => {
             temp_min,
         },
         wind,
+        rain,
         sys: {
             country,
         },
@@ -29,6 +30,7 @@ export const transformWeather = (data) => {
         clouds,
         humidity,
         wind,
+        rain,
         temp: parseInt(temp),
         temp_max: parseInt(temp_max),
         temp_min: parseInt(temp_min),

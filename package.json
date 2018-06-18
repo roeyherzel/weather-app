@@ -13,6 +13,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "immutable": "^3.8.2",
+    "moment": "^2.22.2",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-redux": "^5.0.7",

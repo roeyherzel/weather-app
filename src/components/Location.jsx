@@ -1,31 +1,45 @@
 import React from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 import { Segment, Header, Statistic, Icon } from 'semantic-ui-react';
 
 import WeatherIcon from './WeathIcon';
 
 
 const Container = styled.div`
+    width: 400px;
     margin: 6rem;
 `;
 
-
-const Condition = styled.div`
+const TitleRow = styled.div`
     display: flex;
-    align-items: center;
-    margin-top: 1rem;
-
-    & > .wi {
-        font-size: 3rem;
-        margin-right: 1rem;
-    }
-
-    & > .ui.header:last-child {
-        margin: 0;
-    }
+    justify-content: space-between;
 `;
 
+const Description = styled.div`
+    text-transform: capitalize;
+    text-align: center;
+    line-height: 1.5;
+    color: rgba(0,0,0,.6);
+`;
+
+const Weather = styled.div`
+    display: flex;
+`;
+
+const TempContainer = styled.div`
+    display: flex;
+    font-size: 3rem;
+    margin-left: 0.5rem;
+`;
+
+const Temp = styled.span`
+    line-height: 1;
+`;
+
+
 const Location = ({
+    dt,
     city,
     country,
     weather: {
@@ -40,23 +54,27 @@ const Location = ({
 }) => (
     <Container>
         <Segment>
-            <Header>{ city }, { country }</Header>
-            <Statistic>
-                <Statistic.Value>
-                    { temp }
-                    <WeatherIcon name="degrees" />
-                </Statistic.Value>
-            </Statistic>
-            <Condition>
-                <WeatherIcon id={weatherId} icon={icon} />
-                <Header size="large" content={main} subheader={description} />
-            </Condition>
+            <TitleRow>
+                <Header as="h1">
+                    { city }, { country }
+                    <Header.Subheader>
+                        { moment(dt).format('dddd h:mm a') }
+                    </Header.Subheader>
+                </Header>
 
-
-            <Statistic.Group size="small">
-                <Statistic value={humidity} label="humidity" />
-                <Statistic value={wind.speed} label="wind" />
-            </Statistic.Group>
+                <div>
+                    <Weather>
+                        <WeatherIcon id={weatherId} icon={icon} size="3rem" />
+                        <TempContainer>
+                            <Temp>{ temp }</Temp>
+                            <WeatherIcon name="celsius" size="2rem" />
+                        </TempContainer>
+                    </Weather>
+                    <Description>
+                        { description }
+                    </Description>
+                </div>
+            </TitleRow>
 
         </Segment>
 
