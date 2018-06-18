@@ -13,7 +13,7 @@ const Container = styled.div`
 
 const HeaderRow = styled.div`
     display: flex;
-    align-items: flex-start;
+    //align-items: center;
     justify-content: space-between;
 `;
 
@@ -29,7 +29,7 @@ const Weather = styled.div`
 
 const IconCondition = styled(WeatherIcon)`
     font-size: 3rem;
-    margin: 0 0.5rem;
+    margin: 0 1rem;
 `;
 
 const IconCelsius = styled(WeatherIcon).attrs({
@@ -126,9 +126,13 @@ const Location = ({
                     </Header.Subheader>
                 </Header>
 
-                <Label size="big" basic>{ moment(dt).format('ddd, h:mm A') }</Label>
+
+                <div>
+                    <Header size="big" content={moment(dt).format('hh:mm A')} subheader={moment(dt).format('ddd, MMM Mo')} textAlign="center" />
+                </div>
 
             </HeaderRow>
+
             <Weather>
                 <TempContainer>
                     <Temp>{ temp }</Temp>
