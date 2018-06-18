@@ -1,3 +1,6 @@
+import moment from 'moment';
+
+
 export const transformWeather = (data) => {
 
     const {
@@ -26,7 +29,9 @@ export const transformWeather = (data) => {
     wind.speed = parseInt(wind.speed);
 
     return ({
-        dt,
+        dt: moment.unix(dt),
+        sunrise: moment.unix(sunrise),
+        sunset: moment.unix(sunset),
         city,
         country,
         clouds,
@@ -37,7 +42,5 @@ export const transformWeather = (data) => {
         temp_max: parseInt(temp_max),
         temp_min: parseInt(temp_min),
         weather,
-        sunrise,
-        sunset,
     });
 };

@@ -29,7 +29,7 @@ const Weather = styled.div`
 
 const IconCondition = styled(WeatherIcon)`
     font-size: 3rem;
-    margin: 0 1rem;
+    margin-right: 1rem;
 `;
 
 const IconCelsius = styled(WeatherIcon).attrs({
@@ -128,16 +128,16 @@ const Location = ({
 
 
                 <div>
-                    <Header size="big" content={moment(dt).format('hh:mm A')} subheader={moment(dt).format('ddd, MMM Mo')} textAlign="center" />
+                    <Header size="big" content={dt.format('hh:mm A')} subheader={dt.format('ddd, MMM Mo')} textAlign="center" />
                 </div>
 
             </HeaderRow>
 
             <Weather>
                 <TempContainer>
+                    <IconCondition id={weatherId} icon={icon} />
                     <Temp>{ temp }</Temp>
                     <IconCelsius />
-                    <IconCondition id={weatherId} icon={icon} />
                 </TempContainer>
 
 
@@ -151,12 +151,12 @@ const Location = ({
 
                     <IconGroup>
                         <IconSunrise />
-                        { moment(sunrise).format('h:mm') }
+                        { sunrise.format('h:mm') }
                     </IconGroup>
 
                     <IconGroup>
                         <IconMoonrise />
-                        { moment(sunset).format('h:mm') }
+                        { sunset.format('h:mm') }
                     </IconGroup>
                 </IconGroupLeft>
             </Weather>
