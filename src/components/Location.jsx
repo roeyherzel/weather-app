@@ -23,11 +23,11 @@ const Description = styled.div`
 
 const Weather = styled.div`
     display: flex;
-    margin-top: 0.5rem;
+    align-items: center;
 `;
 
 const IconCondition = styled(WeatherIcon)`
-    font-size: 3rem;
+    font-size: 3.5rem;
 `;
 
 const IconCelsius = styled(WeatherIcon).attrs({
@@ -50,6 +50,7 @@ const IconMoonrise = styled(IconSunrise).attrs({
 `;
 
 const IconGroup = styled.div`
+    align-self: flex-end;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -108,25 +109,19 @@ const Location = ({
                     { city }, { country }
                     <Header.Subheader>
                         <Description>
-                            { description }
+                            { moment(dt).format('dddd MMM Do') }, { description }
                         </Description>
                     </Header.Subheader>
                 </Header>
 
-                <Label size="big" basic>{ moment(dt).format('ddd hh:mm A') }</Label>
-            </HeaderRow>
-            <Weather>
                 <TempContainer>
                     <Temp>{ temp }</Temp>
                     <IconCelsius />
                 </TempContainer>
 
-                <IconGroup>
-                    <IconCondition id={weatherId} icon={icon} />
-                    <div>
-                        <TempHeigh>{ temp_max }&deg;</TempHeigh>&nbsp;<TempLow>{ temp_min }&deg;</TempLow>
-                    </div>
-                </IconGroup>
+            </HeaderRow>
+            <Weather>
+                <Label size="big" basic>{ moment(dt).format('hh:mm A') }</Label>
 
                 <IconGroupLeft>
                     <IconGroup>
@@ -137,6 +132,12 @@ const Location = ({
                     <IconGroup>
                         <IconMoonrise />
                         { moment(sunset).format('h:mm') }
+                    </IconGroup>
+                    <IconGroup>
+                        <IconCondition id={weatherId} icon={icon} />
+                        <div>
+                            <TempHeigh>{ temp_max }&deg;</TempHeigh>&nbsp;<TempLow>{ temp_min }&deg;</TempLow>
+                        </div>
                     </IconGroup>
                 </IconGroupLeft>
             </Weather>
