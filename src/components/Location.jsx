@@ -43,7 +43,7 @@ const IconCelsius = styled(WeatherIcon).attrs({
 const IconSunrise = styled(WeatherIcon).attrs({
     name: 'sunrise',
 })`
-    font-size: 2rem;
+    font-size: 1.5rem;
 `;
 
 const IconMoonrise = styled(IconSunrise).attrs({
@@ -128,7 +128,7 @@ const Location = ({
 
 
                 <div>
-                    <Header size="big" content={dt.format('hh:mm A')} subheader={dt.format('ddd, MMM Mo')} textAlign="center" />
+                    <Header size="big" content={dt.format('h:mm A')} subheader={dt.format('ddd, MMM Mo')} textAlign="center" />
                 </div>
 
             </HeaderRow>
