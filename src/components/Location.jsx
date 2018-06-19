@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import moment from 'moment';
-import { Segment, Header, Label } from 'semantic-ui-react';
+import { Segment, Header } from 'semantic-ui-react';
 
 import WeatherIcon from './WeathIcon';
 
@@ -13,8 +12,11 @@ const Container = styled.div`
 
 const HeaderRow = styled.div`
     display: flex;
-    //align-items: center;
     justify-content: space-between;
+
+    & > .header {
+        margin-top: 0;
+    }
 `;
 
 const Description = styled.div`
@@ -105,7 +107,6 @@ const Location = ({
     weather: {
         id: weatherId,
         icon,
-        main,
         description,
     },
     sunrise,
@@ -126,11 +127,12 @@ const Location = ({
                     </Header.Subheader>
                 </Header>
 
-
-                <div>
-                    <Header size="big" content={dt.format('h:mm A')} subheader={dt.format('ddd, MMM Mo')} textAlign="center" />
-                </div>
-
+                <Header
+                    as="h3"
+                    content={dt.format('h:mm A')}
+                    subheader={dt.format('ddd, MMM Mo')}
+                    textAlign="center"
+                />
             </HeaderRow>
 
             <Weather>
@@ -161,8 +163,6 @@ const Location = ({
                 </IconGroupLeft>
             </Weather>
         </Segment>
-
-
     </Container>
 );
 
