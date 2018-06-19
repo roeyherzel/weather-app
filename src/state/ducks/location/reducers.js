@@ -1,5 +1,6 @@
 import { fromJS } from 'immutable';
 import { handleActions } from 'redux-actions';
+import { transformWeather } from './transforms';
 
 
 const defaultState = fromJS({
@@ -8,7 +9,7 @@ const defaultState = fromJS({
 
 
 const reducer = handleActions({
-    SET_WEATHER: (state, { payload }) => state.set('data', payload),
+    SET_WEATHER: (state, { payload }) => state.set('data', payload ? transformWeather(payload) : null),
 
 }, defaultState);
 

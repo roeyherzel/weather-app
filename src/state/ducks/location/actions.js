@@ -1,7 +1,6 @@
 import { createActions } from 'redux-actions';
-import { transformWeather } from './transforms';
 
 
-const actions = createActions({ SET_WEATHER: data => transformWeather(data) });
+const actions = createActions({ SET_WEATHER: data => data });
 
 export default actions;
