@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import '../openWeather/css/weather-icons.min.css';
-import { getWeatherIcon } from '../openWeather';
+import '../openWeatherMap/css/weather-icons.min.css';
+import { getWeatherIcon } from '../openWeatherMap';
 
 
 const Icon = styled.i`

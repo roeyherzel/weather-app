@@ -1,4 +1,4 @@
-import { getUrl } from '../../../openWeather';
+import { getUrl } from '../../../openWeatherMap';
 import actions from './actions';
 
 
