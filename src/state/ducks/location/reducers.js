@@ -9,7 +9,7 @@ const defaultState = fromJS({
 
 
 const reducer = handleActions({
-    SET_WEATHER: (state, { payload }) => state.set('data', payload ? transformWeather(payload) : null),
+    SET_WEATHER: (state, { payload }) => state.set('data', payload ? fromJS(transformWeather(payload)) : null),
 
 }, defaultState);
 

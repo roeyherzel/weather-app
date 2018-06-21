@@ -40,7 +40,7 @@ const Description = styled.div`
 const Weather = styled.div`
     display: flex;
     align-items: center;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
 `;
 
 const IconCondition = styled(WeatherIcon)`
