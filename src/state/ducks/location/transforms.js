@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { transformIcon } from '../../../weather-icons';
 
 
 export const transformWeather = (data) => {
@@ -16,17 +17,18 @@ export const transformWeather = (data) => {
             temp_min,
         },
         wind,
-        rain,
         sys: {
             country,
             sunrise,
             sunset,
         },
-        weather: _weather,
+        weather,
     } = data;
 
-    const weather = _weather[0];
+    const { id, icon, description } = weather[0];
+
     wind.speed = parseInt(wind.speed);
+    wind.deg = parseInt(wind.deg);
 
     return {
         dt: moment.unix(dt),
@@ -37,10 +39,10 @@ export const transformWeather = (data) => {
         clouds,
         humidity,
         wind,
-        rain,
         temp: parseInt(temp),
         temp_max: parseInt(temp_max),
         temp_min: parseInt(temp_min),
-        weather,
+        weather: description,
+        icon: transformIcon(id, icon),
     };
 };

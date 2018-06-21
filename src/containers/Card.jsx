@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import toJS from '../hoc/toJS';
 import { fetchWeather } from '../state/ducks/location/operations';
 
-import Location from '../components/Location';
+import Card from '../components/Card';
 
 
 class LocationContainer extends React.Component {
@@ -16,7 +16,7 @@ class LocationContainer extends React.Component {
 
     render() {
         return this.props.data
-            ? <Location {...this.props.data} />
+            ? <Card {...this.props.data} />
             : null;
     }
 }

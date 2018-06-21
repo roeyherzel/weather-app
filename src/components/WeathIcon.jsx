@@ -1,19 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import '../openWeatherMap/css/weather-icons.min.css';
-import { getWeatherIcon } from '../openWeatherMap';
+
+import '../weather-icons/css/weather-icons.min.css';
+import '../weather-icons/css/weather-icons-wind.min.css';
 
 
 const Icon = styled.i`
 `;
 
-const WeatherIcon = ({
-    id, icon, name, className,
-}) => {
-    const iconPrefix = `${className} wi wi-`;
-    const iconName = name || getWeatherIcon(id, icon);
+const WeatherIcon = ({ name, className }) => <Icon className={`${className} wi wi-${name}`} />;
 
-    return <Icon className={iconPrefix + iconName} />;
-};
+export const WindIcon = ({ deg }) => <WeatherIcon name={`wind towards-${deg}-deg`} />;
 
 export default WeatherIcon;

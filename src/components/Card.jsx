@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Segment } from 'semantic-ui-react';
 
 import CardHead from './CardHead';
+import CardBody from './CardBody';
 
 
 const Container = styled.div`
@@ -11,12 +12,13 @@ const Container = styled.div`
 `;
 
 
-const Location = props => (
+const Card = props => (
     <Container>
         <Segment.Group>
             <CardHead {...props} />
+            <CardBody {...props} />
         </Segment.Group>
     </Container>
 );
 
-export default Location;
+export default Card;

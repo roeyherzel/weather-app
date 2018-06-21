@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { string, number, instanceOf, shape } from 'prop-types';
+import { string, number, instanceOf } from 'prop-types';
 import styled from 'styled-components';
 import { Segment, Header } from 'semantic-ui-react';
 
@@ -11,11 +11,8 @@ const propTypes = {
     dt: instanceOf(moment).isRequired,
     city: string.isRequired,
     country: string.isRequired,
-    weather: shape({
-        id: number.isRequired,
-        icon: string.isRequired,
-        description: string.isRequired,
-    }),
+    weather: string.isRequired,
+    icon: string.isRequired,
     sunrise: instanceOf(moment).isRequired,
     sunset: instanceOf(moment).isRequired,
     temp: number.isRequired,
@@ -27,6 +24,7 @@ const propTypes = {
 const HeaderRow = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
 
     & > .header {
         margin-top: 0;
@@ -118,11 +116,8 @@ const CardHead = ({
     dt,
     city,
     country,
-    weather: {
-        id: weatherId,
-        icon,
-        description,
-    },
+    weather,
+    icon,
     sunrise,
     sunset,
     temp,
@@ -135,7 +130,7 @@ const CardHead = ({
                 { city }, { country }
                 <Header.Subheader>
                     <Description>
-                        { description }
+                        { weather }
                     </Description>
                 </Header.Subheader>
             </Header>
@@ -150,7 +145,7 @@ const CardHead = ({
 
         <Weather>
             <TempContainer>
-                <IconCondition id={weatherId} icon={icon} />
+                <IconCondition name={icon} />
                 <Temp>{ temp }</Temp>
                 <IconCelsius />
             </TempContainer>

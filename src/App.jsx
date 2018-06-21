@@ -1,10 +1,10 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
 
-import Location from './containers/Location';
+import Card from './containers/Card';
 
 
-const App = () => <Location />;
+const App = () => <Card />;
 
 
 export default hot(module)(App);
