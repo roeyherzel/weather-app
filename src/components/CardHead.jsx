@@ -73,6 +73,7 @@ const TempLow = styled.span`
 `;
 
 const TempHigh = styled.span`
+    padding-right: 5px;
 `;
 
 const CardHead = ({
@@ -109,7 +110,7 @@ const CardHead = ({
                 <TempContainer>
                     <Temp>{ temp }</Temp>
                     <TempHighLow>
-                        <TempHigh>{ temp_max }&deg;</TempHigh>&nbsp;<TempLow>{ temp_min }&deg;</TempLow>
+                        <TempHigh>{ temp_max }&deg;</TempHigh><TempLow>{ temp_min }&deg;</TempLow>
                     </TempHighLow>
                 </TempContainer>
                 <IconCelsius />

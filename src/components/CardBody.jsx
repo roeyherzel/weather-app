@@ -11,22 +11,17 @@ const propTypes = {
     sunrise: instanceOf(moment).isRequired,
     sunset: instanceOf(moment).isRequired,
     humidity: number.isRequired,
+    clouds: number.isRequired,
 };
 
 
-const IconSunrise = styled(WeatherIcon).attrs({
-    name: 'sunrise',
+const Icon = styled(WeatherIcon).attrs({
 })`
     font-size: 1.5rem;
 `;
 
-const IconMoonrise = styled(IconSunrise).attrs({
-    name: 'moonrise',
-})`
-`;
 
 const IconGroup = styled.div`
-    align-self: flex-end;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,13 +29,12 @@ const IconGroup = styled.div`
     line-height: 1.4;
 `;
 
-const IconGroupLeft = styled.div`
-    align-self: flex-end;
+const IconsContainer = styled.div`
     display: flex;
-    margin-left: auto;
+    justify-content: space-around;
 
     & > div {
-        margin-left: 1rem;
+        margin: 0 0.5rem;
     }
 `;
 
@@ -48,22 +42,30 @@ const CardBody = ({
     sunrise,
     sunset,
     humidity,
+    clouds,
 }) => (
     <Segment>
-        <IconGroupLeft>
+        <IconsContainer>
             <IconGroup>
-                <IconSunrise />
+                <Icon name="sunrise" />
                 { sunrise.format('h:mm') }
             </IconGroup>
 
             <IconGroup>
-                <IconMoonrise />
-                { sunset.format('h:mm') }
+                <Icon name="moonrise" />
+                { sunset.format('H:mm') }
             </IconGroup>
-        </IconGroupLeft>
-        <div>
-            <span>Humidity: { humidity }%</span>
-        </div>
+
+            <IconGroup>
+                <Icon name="humidity" />
+                { humidity }%
+            </IconGroup>
+
+            <IconGroup>
+                <Icon name="cloud" />
+                { clouds }%
+            </IconGroup>
+        </IconsContainer>
     </Segment>
 );
 
