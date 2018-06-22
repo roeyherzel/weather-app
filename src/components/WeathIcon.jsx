@@ -6,6 +6,7 @@ import '../weather-icons/css/weather-icons-wind.min.css';
 
 
 const Icon = styled.i`
+    font-size: 1.5rem;
 `;
 
 const WeatherIcon = ({ name, className }) => <Icon className={`${className} wi wi-${name}`} />;

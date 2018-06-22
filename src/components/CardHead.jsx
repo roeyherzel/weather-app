@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { string, number, instanceOf } from 'prop-types';
 import styled from 'styled-components';
-import { Segment, Header } from 'semantic-ui-react';
+import { Segment, Header, Label } from 'semantic-ui-react';
 
 import WeatherIcon from './WeathIcon';
 
@@ -13,8 +13,6 @@ const propTypes = {
     country: string.isRequired,
     weather: string.isRequired,
     icon: string.isRequired,
-    sunrise: instanceOf(moment).isRequired,
-    sunset: instanceOf(moment).isRequired,
     temp: number.isRequired,
     temp_max: number.isRequired,
     temp_min: number.isRequired,
@@ -24,9 +22,9 @@ const propTypes = {
 const HeaderRow = styled.div`
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: flex-start;
 
-    & > .header {
+    & .header {
         margin-top: 0;
     }
 `;
@@ -38,7 +36,6 @@ const Description = styled.div`
 const Weather = styled.div`
     display: flex;
     align-items: center;
-    margin-top: 1rem;
 `;
 
 const IconCondition = styled(WeatherIcon)`
@@ -49,60 +46,26 @@ const IconCondition = styled(WeatherIcon)`
 const IconCelsius = styled(WeatherIcon).attrs({
     name: 'celsius',
 })`
-    align-self: self-start;
+    align-self: flex-start;
     font-size: 2rem;
-    margin-left: 4px;
-`;
-
-const IconSunrise = styled(WeatherIcon).attrs({
-    name: 'sunrise',
-})`
-    font-size: 1.5rem;
-`;
-
-const IconMoonrise = styled(IconSunrise).attrs({
-    name: 'moonrise',
-})`
-`;
-
-const IconThermometer = styled(IconSunrise).attrs({
-    name: 'thermometer',
-})`
-`;
-
-
-const IconGroup = styled.div`
-    align-self: flex-end;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 1rem;
-    line-height: 1.4;
-`;
-
-const IconGroupLeft = styled.div`
-    align-self: flex-end;
-    display: flex;
-    margin-left: auto;
-
-    & > div {
-        margin-left: 1rem;
-    }
+    margin-left: 2px;
 `;
 
 const TempContainer = styled.div`
     display: flex;
-    margin-right: 0.5rem;
+    flex-direction: column;
 `;
 
-
 const Temp = styled.span`
+    ${''}
+    display: flex;
+    align-items: baseline;
     line-height: 1;
     font-size: 3rem;
 `;
 
 const TempHighLow = styled.div`
-    align-self: flex-end;
+    text-align: center;
 `;
 
 const TempLow = styled.span`
@@ -118,58 +81,42 @@ const CardHead = ({
     country,
     weather,
     icon,
-    sunrise,
-    sunset,
     temp,
     temp_max,
     temp_min,
 }) => (
     <Segment>
         <HeaderRow>
-            <Header as="h3">
-                { city }, { country }
-                <Header.Subheader>
-                    <Description>
-                        { weather }
-                    </Description>
-                </Header.Subheader>
-            </Header>
+            <div>
+                <Header as="h3">
+                    { city }, { country }
+                    <Header.Subheader>
+                        <Description>
+                            { weather }
+                        </Description>
+                    </Header.Subheader>
+                </Header>
 
-            <Header
-                as="h3"
-                content={dt.format('h:mm A')}
-                subheader={dt.format('ddd, MMM Mo')}
-                textAlign="center"
-            />
-        </HeaderRow>
+                <Label
+                    size="large"
+                    content={dt.format('h:mm A')}
+                    detail={dt.format('ddd')}
+                />
+            </div>
 
-        <Weather>
-            <TempContainer>
+            <Weather>
                 <IconCondition name={icon} />
-                <Temp>{ temp }</Temp>
-                <IconCelsius />
-            </TempContainer>
-
-
-            <IconGroupLeft>
-                <IconGroup>
-                    <IconThermometer />
+                <TempContainer>
+                    <Temp>{ temp }</Temp>
                     <TempHighLow>
                         <TempHigh>{ temp_max }&deg;</TempHigh>&nbsp;<TempLow>{ temp_min }&deg;</TempLow>
                     </TempHighLow>
-                </IconGroup>
+                </TempContainer>
+                <IconCelsius />
+            </Weather>
+        </HeaderRow>
 
-                <IconGroup>
-                    <IconSunrise />
-                    { sunrise.format('h:mm') }
-                </IconGroup>
 
-                <IconGroup>
-                    <IconMoonrise />
-                    { sunset.format('h:mm') }
-                </IconGroup>
-            </IconGroupLeft>
-        </Weather>
     </Segment>
 );
 
