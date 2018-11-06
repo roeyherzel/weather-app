@@ -6,4 +6,3 @@ export default {
         gray: 'rgba(0,0,0,.6)',
     },
 };
-

@@ -21,6 +21,6 @@ render(
         <ThemeProvider theme={theme}>
             <App />
         </ThemeProvider>
-    </Provider>
-    , document.getElementById('root'),
+    </Provider>,
+    document.getElementById('root'),
 );

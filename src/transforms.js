@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { transformIcon } from '../../../weather-icons';
+import { transformIcon } from './weather-icons';
 
 
 export const transformWeather = (data) => {
