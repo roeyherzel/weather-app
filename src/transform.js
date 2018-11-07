@@ -2,6 +2,22 @@ import moment from 'moment';
 import { transformIcon } from './weather-icons';
 
 
+export const transformCurrentWeather = ({
+    id,
+    name,
+    dt,
+    weather,
+    sys: {
+        country,
+    },
+}) => ({
+    id,
+    name,
+    country,
+    dt: moment.unix(dt),
+    weather: weather[0],
+});
+
 export const transformWeather = (data) => {
 
     const {

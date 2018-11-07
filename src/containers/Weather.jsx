@@ -1,9 +1,13 @@
 import axios from 'axios';
 import {
     compose,
+    branch,
+    renderNothing,
     lifecycle,
     withState,
 } from 'recompose';
+
+import { transformCurrentWeather } from '../transform';
 
 import Weather from '../components/Weather';
 
@@ -17,23 +21,21 @@ const params = {
     zip: '97219,us',
 };
 
-async function getWeather() {
+async function getCurrentWeather() {
     try {
-        const response = await axios.get(`${API_URL}/weather`, { params });
-        console.log(response);
-        return response.data;
+        const { data } = await axios.get(`${API_URL}/weather`, { params });
+        return transformCurrentWeather(data);
     } catch (error) {
-        console.error(error);
+        console.error(error); // eslint-disable-line no-console
     }
 }
 
 const withLifecycle = lifecycle({
     async componentDidMount() {
         const { setLoading, setData } = this.props;
-        const data = await getWeather();
+        const data = await getCurrentWeather();
         setData(data);
         setLoading(false);
-        console.log(data);
     },
 });
 
@@ -41,8 +43,14 @@ const withLoadingState = withState('isLoading', 'setLoading', true);
 
 const withDataState = withState('data', 'setData', null);
 
+const withLoadingBranch = branch(
+    ({ isLoading }) => isLoading,
+    renderNothing,
+);
+
 export default compose(
     withLoadingState,
     withDataState,
     withLifecycle,
+    withLoadingBranch,
 )(Weather);
