@@ -21,6 +21,7 @@ export async function getCityWeather(cityID = portlandCityID) {
             },
         });
         return transformCurrentWeather(data);
+
     } catch (error) {
         console.error(error); // eslint-disable-line no-console
     }
@@ -35,7 +36,8 @@ export async function search(query) {
                 type: 'like',
             },
         });
-        console.log(data);
+        return data.list.map(transformCurrentWeather);
+
     } catch (error) {
         const { response: { status, statusText } } = error;
         console.error({ status, statusText }); // eslint-disable-line no-console

@@ -7,29 +7,16 @@ import {
 } from 'prop-types';
 import moment from 'moment';
 import styled from 'styled-components';
-import { Header } from 'semantic-ui-react';
-import media, { sizes as mediaSizes } from '../styleUtils/media';
 
-
+import { Header, Segment, Label } from 'semantic-ui-react';
 import WeatherIcons from './WeatherIcons';
-import CitySearch from '../containers/CitySearch';
 
 
-const Page = styled.div`
-    max-width: ${mediaSizes.mobile}px;
-    margin: 4rem;
-
-    ${media.mobile`
-        margin: 0;
-    `};
-`;
-
-const Container = styled.div`
-    display: flex;
-    justify-content: space-between;
-    padding: 1.2rem;
-    border: 1px solid black;
-    border-radius: 6px;
+const Container = styled(Segment)`
+    && {
+        display: flex;
+        justify-content: space-between;
+    }
 `;
 
 const StyledHeader = styled(Header)`
@@ -40,22 +27,21 @@ const StyledHeader = styled(Header)`
 `;
 
 const StyledWeatherIcons = styled(WeatherIcons)`
-    font-size: 3rem;
-    margin-right: 1rem;
+    font-size: 2.5rem;
+    margin-right: 5px;
 `;
 
 const TempContainer = styled.div`
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 1rem;
+    ${'' /* flex-direction: column;
+    align-items: flex-end; */}
 `;
 
 const Temp = styled.div`
     position: relative;
-    display: inline-block;
-    line-height: 0.8;
     font-size: 4rem;
+    line-height: 0.8;
+    margin-right: 1rem;
 `;
 
 const Deg = styled.span`
@@ -66,9 +52,10 @@ const Deg = styled.span`
 `;
 
 const Description = styled.div`
+    font-size: 1rem;
     line-height: 1.7;
-    text-align: center;
     text-transform: uppercase;
+    text-align: center;
 `;
 
 
@@ -78,32 +65,33 @@ const Current = ({
         icon,
         city,
         country,
-        description,
+        main,
     },
 }) => (
-    <Page>
-        <CitySearch />
+    <Container>
+        <div>
 
-        <Container>
             <StyledHeader size="large">
-                <StyledWeatherIcons name={icon} />
                 <Header.Content>
                     { city }
                     { ', ' }
                     { country }
-                    <Header.Subheader>{ dt.format('dddd LT') }</Header.Subheader>
+                    { /* <Header.Subheader>{ dt.format('ddd LT') }</Header.Subheader> */ }
                 </Header.Content>
             </StyledHeader>
+            <Label color="black">{ dt.format('ddd LT') }</Label>
+        </div>
 
-            <TempContainer>
-                <Temp>
-                    <span>53</span>
-                    <Deg>&deg;F</Deg>
-                </Temp>
-                <Description>{ description }</Description>
-            </TempContainer>
-        </Container>
-    </Page>
+
+        <TempContainer>
+            <StyledWeatherIcons name={icon} />
+            <Temp>
+                <span>53</span>
+                <Description>{ main }</Description>
+                <Deg>&deg;F</Deg>
+            </Temp>
+        </TempContainer>
+    </Container>
 );
 
 Current.propTypes = {

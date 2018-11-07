@@ -20,11 +20,14 @@ export const transformCurrentWeather = ({
         country,
     },
 }) => {
-    const { id, icon, description } = weather[0];
+    const {
+        id, icon, main, description,
+    } = weather[0];
     return ({
         city,
         cityID,
         country,
+        main,
         description,
         dt: moment.unix(dt),
         icon: transformIcon({ id, icon }),
