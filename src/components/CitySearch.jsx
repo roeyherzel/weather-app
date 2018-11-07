@@ -1,5 +1,7 @@
 import React from 'react';
-import { func } from 'prop-types';
+import {
+    func, arrayOf, shape, number,
+} from 'prop-types';
 
 import { Segment, Input } from 'semantic-ui-react';
 import Current from './Current';
@@ -41,6 +43,9 @@ const CityDropdown = ({
 CityDropdown.propTypes = {
     handleInputChange: func.isRequired,
     handleSearch: func.isRequired,
+    cities: arrayOf(shape({
+        cityID: number.isRequired,
+    }).isRequired),
 };
 
 export default CityDropdown;

@@ -33,8 +33,6 @@ const StyledWeatherIcons = styled(WeatherIcons)`
 
 const TempContainer = styled.div`
     display: flex;
-    ${'' /* flex-direction: column;
-    align-items: flex-end; */}
 `;
 
 const Temp = styled.div`
@@ -70,7 +68,6 @@ const Current = ({
 }) => (
     <Container>
         <div>
-
             <StyledHeader size="large">
                 <Header.Content>
                     { city }
@@ -79,12 +76,18 @@ const Current = ({
                     { /* <Header.Subheader>{ dt.format('ddd LT') }</Header.Subheader> */ }
                 </Header.Content>
             </StyledHeader>
-            <Label color="black">{ dt.format('ddd LT') }</Label>
+
+            <Label
+                icon="clock"
+                color="black"
+                content={dt.format('ddd h:mm a')}
+            />
         </div>
 
 
         <TempContainer>
             <StyledWeatherIcons name={icon} />
+
             <Temp>
                 <span>53</span>
                 <Description>{ main }</Description>
