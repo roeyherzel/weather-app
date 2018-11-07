@@ -12,21 +12,24 @@ import media, { sizes as mediaSizes } from '../styleUtils/media';
 
 
 import WeatherIcons from './WeatherIcons';
-import CityDropdown from './CityDropdown';
+import CitySearch from '../containers/CitySearch';
 
 
-const Container = styled.div`
-    display: flex;
-    justify-content: space-between;
+const Page = styled.div`
     max-width: ${mediaSizes.mobile}px;
     margin: 4rem;
-    padding: 1.2rem;
-    border: 1px solid black;
-    border-radius: 6px;
 
     ${media.mobile`
         margin: 0;
     `};
+`;
+
+const Container = styled.div`
+    display: flex;
+    justify-content: space-between;
+    padding: 1.2rem;
+    border: 1px solid black;
+    border-radius: 6px;
 `;
 
 const StyledHeader = styled(Header)`
@@ -78,10 +81,9 @@ const Current = ({
         description,
     },
 }) => (
-    <div>
-        <Container>
-            <CityDropdown />
-        </Container>
+    <Page>
+        <CitySearch />
+
         <Container>
             <StyledHeader size="large">
                 <StyledWeatherIcons name={icon} />
@@ -101,7 +103,7 @@ const Current = ({
                 <Description>{ description }</Description>
             </TempContainer>
         </Container>
-    </div>
+    </Page>
 );
 
 Current.propTypes = {

@@ -1,19 +1,43 @@
-const API_URL = 'http://api.openweathermap.org/data/2.5';
-const API_KEY = '1855f775ccc6226f29eb4d10d9327fc0';
+import axios from 'axios';
+import { transformCurrentWeather } from './transform';
 
 
-const defaultParams = {
-    appid: API_KEY,
+const API = 'http://api.openweathermap.org/data/2.5';
+const KEY = '1855f775ccc6226f29eb4d10d9327fc0';
+
+const portlandCityID = 420029256;
+
+const baseParams = {
+    appid: KEY,
     units: 'metric',
 };
 
-export const getUrl = (endpoint, params = {}) => {
-    const url = new URL(`${API_URL}/${endpoint}`);
+export async function getCityWeather(cityID = portlandCityID) {
+    try {
+        const { data } = await axios.get(`${API}/weather`, {
+            params: {
+                ...baseParams,
+                id: cityID,
+            },
+        });
+        return transformCurrentWeather(data);
+    } catch (error) {
+        console.error(error); // eslint-disable-line no-console
+    }
+}
 
-    url.search = new URLSearchParams({
-        ...defaultParams,
-        ...params,
-    });
-
-    return url;
-};
+export async function search(query) {
+    try {
+        const { data } = await axios.get(`${API}/find`, {
+            params: {
+                ...baseParams,
+                q: query,
+                type: 'like',
+            },
+        });
+        console.log(data);
+    } catch (error) {
+        const { response: { status, statusText } } = error;
+        console.error({ status, statusText }); // eslint-disable-line no-console
+    }
+}
