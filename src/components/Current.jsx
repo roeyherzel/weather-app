@@ -8,17 +8,17 @@ import {
 import moment from 'moment';
 import styled from 'styled-components';
 import { Header } from 'semantic-ui-react';
-import media from '../styleUtils/media';
+import media, { sizes as mediaSizes } from '../styleUtils/media';
 
 
 import WeatherIcons from './WeatherIcons';
+import CityDropdown from './CityDropdown';
 
 
 const Container = styled.div`
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    max-width: ${media.mobile};
+    max-width: ${mediaSizes.mobile}px;
     margin: 4rem;
     padding: 1.2rem;
     border: 1px solid black;
@@ -29,25 +29,28 @@ const Container = styled.div`
     `};
 `;
 
+const StyledHeader = styled(Header)`
+    && {
+        display: flex;
+        align-items: center;
+    }
+`;
+
 const StyledWeatherIcons = styled(WeatherIcons)`
-    position: absolute;
-    top: 0;
-    right: 100%;
-    font-size: 2.6rem;
-    vertical-align: top;
-    margin-right: 0.5rem;
+    font-size: 3rem;
+    margin-right: 1rem;
 `;
 
 const TempContainer = styled.div`
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     margin-right: 1rem;
 `;
 
 const Temp = styled.div`
     position: relative;
-    display: flex;
-    align-items: flex-start;
+    display: inline-block;
     line-height: 0.8;
     font-size: 4rem;
 `;
@@ -60,11 +63,9 @@ const Deg = styled.span`
 `;
 
 const Description = styled.div`
-    font-size: 16px;
     line-height: 1.7;
     text-align: center;
-    text-transform: capitalize;
-    color: rgba(0,0,0,0.6);
+    text-transform: uppercase;
 `;
 
 
@@ -77,25 +78,30 @@ const Current = ({
         description,
     },
 }) => (
-    <Container>
-        <Header size="large">
-            { city }
-            { ', ' }
-            { country }
-            <Header.Subheader>{ dt.format('dddd LT') }</Header.Subheader>
-        </Header>
+    <div>
+        <Container>
+            <CityDropdown />
+        </Container>
+        <Container>
+            <StyledHeader size="large">
+                <StyledWeatherIcons name={icon} />
+                <Header.Content>
+                    { city }
+                    { ', ' }
+                    { country }
+                    <Header.Subheader>{ dt.format('dddd LT') }</Header.Subheader>
+                </Header.Content>
+            </StyledHeader>
 
-        <div>
             <TempContainer>
                 <Temp>
-                    <StyledWeatherIcons name={icon} />
                     <span>53</span>
                     <Deg>&deg;F</Deg>
                 </Temp>
                 <Description>{ description }</Description>
             </TempContainer>
-        </div>
-    </Container>
+        </Container>
+    </div>
 );
 
 Current.propTypes = {
