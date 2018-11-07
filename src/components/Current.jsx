@@ -18,9 +18,9 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 400px;
+    max-width: ${media.mobile};
     margin: 4rem;
-    padding: 1rem;
+    padding: 1.2rem;
     border: 1px solid black;
     border-radius: 6px;
 
@@ -61,10 +61,10 @@ const Deg = styled.span`
 
 const Description = styled.div`
     font-size: 16px;
+    line-height: 1.7;
     text-align: center;
     text-transform: capitalize;
     color: rgba(0,0,0,0.6);
-    margin-top: 4px;
 `;
 
 
