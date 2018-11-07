@@ -1,10 +1,10 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
 
-import Weather from './containers/Weather';
+import Current from './containers/Current';
 
 
-const App = () => <Weather />;
+const App = () => <Current />;
 
 
 export default hot(module)(App);

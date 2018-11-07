@@ -9,7 +9,7 @@ import {
 
 import { transformCurrentWeather } from '../transform';
 
-import Weather from '../components/Weather';
+import Current from '../components/Current';
 
 
 const API_URL = 'http://api.openweathermap.org/data/2.5';
@@ -53,4 +53,4 @@ export default compose(
     withDataState,
     withLifecycle,
     withLoadingBranch,
-)(Weather);
+)(Current);

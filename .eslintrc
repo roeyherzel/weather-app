@@ -32,8 +32,9 @@
         "consistent-return": "off",
         "radix": ["error", "as-needed"],
         "prefer-promise-reject-errors": "off",
-        "no-mixed-operators": ["error", { "allowSamePrecedence": true }],
+        "template-curly-spacing": "off",
 
+        "no-mixed-operators": ["error", { "allowSamePrecedence": true }],
         "no-underscore-dangle": "off",
         "no-plusplus": "off",
         "no-shadow": "off",

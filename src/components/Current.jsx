@@ -7,31 +7,41 @@ import {
 } from 'prop-types';
 import moment from 'moment';
 import styled from 'styled-components';
-
 import { Header } from 'semantic-ui-react';
+import media from '../styleUtils/media';
+
 
 import WeatherIcons from './WeatherIcons';
 
 
 const Container = styled.div`
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    width: 400px;
+    max-width: 400px;
     margin: 4rem;
     padding: 1rem;
     border: 1px solid black;
     border-radius: 6px;
+
+    ${media.mobile`
+        margin: 0;
+    `};
 `;
 
 const StyledWeatherIcons = styled(WeatherIcons)`
-    font-size: 3rem;
+    position: absolute;
+    top: 0;
+    right: 100%;
+    font-size: 2.6rem;
     vertical-align: top;
+    margin-right: 0.5rem;
 `;
 
 const TempContainer = styled.div`
-    display: inline-flex;
-    flex-direction: column;
+    display: inline-block;
     align-items: center;
+    margin-right: 1rem;
 `;
 
 const Temp = styled.div`
@@ -41,7 +51,6 @@ const Temp = styled.div`
     line-height: 0.8;
     font-size: 4rem;
 `;
-
 
 const Deg = styled.span`
     position: absolute;
@@ -58,7 +67,8 @@ const Description = styled.div`
     margin-top: 4px;
 `;
 
-const Weather = ({
+
+const Current = ({
     data: {
         dt,
         icon,
@@ -76,9 +86,9 @@ const Weather = ({
         </Header>
 
         <div>
-            <StyledWeatherIcons name={icon} />
             <TempContainer>
                 <Temp>
+                    <StyledWeatherIcons name={icon} />
                     <span>53</span>
                     <Deg>&deg;F</Deg>
                 </Temp>
@@ -88,7 +98,7 @@ const Weather = ({
     </Container>
 );
 
-Weather.propTypes = {
+Current.propTypes = {
     data: shape({
         dt: instanceOf(moment).isRequired,
         city: string.isRequired,
@@ -100,4 +110,4 @@ Weather.propTypes = {
     }),
 };
 
-export default Weather;
+export default Current;

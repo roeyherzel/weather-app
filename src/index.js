@@ -7,7 +7,7 @@ import thunkMiddleware from 'redux-thunk';
 import { ThemeProvider } from 'styled-components';
 
 import 'semantic-ui-css/semantic.min.css';
-import theme from './styles/theme';
+import theme from './styleUtils/theme';
 
 import App from './App';
 
