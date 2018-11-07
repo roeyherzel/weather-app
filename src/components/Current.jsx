@@ -51,7 +51,7 @@ const Deg = styled.span`
 
 const Description = styled.div`
     font-size: 1rem;
-    line-height: 1.7;
+    line-height: 2;
     text-transform: uppercase;
     text-align: center;
 `;
@@ -80,7 +80,8 @@ const Current = ({
             <Label
                 icon="clock"
                 color="black"
-                content={dt.format('ddd h:mm a')}
+                content={dt.format('h:mm a')}
+                detail={dt.format('ddd')}
             />
         </div>
 
