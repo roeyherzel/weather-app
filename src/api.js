@@ -36,6 +36,7 @@ export async function search(query) {
                 type: 'like',
             },
         });
+
         return data.list.map(transformCurrentWeather);
 
     } catch (error) {

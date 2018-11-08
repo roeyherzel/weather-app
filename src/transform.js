@@ -1,4 +1,5 @@
-import moment from 'moment';
+import moment from 'moment-timezone';
+import tzlookup from 'tz-lookup';
 
 
 const transformIcon = ({ id, icon }) => {
@@ -16,6 +17,7 @@ export const transformCurrentWeather = ({
     name: city,
     dt,
     weather,
+    coord,
     sys: {
         country,
     },
@@ -23,13 +25,19 @@ export const transformCurrentWeather = ({
     const {
         id, icon, main, description,
     } = weather[0];
+
+    const { lat, lon } = coord;
+    const tz = tzlookup(lat, lon);
+
     return ({
         city,
         cityID,
         country,
+        coord,
         main,
         description,
-        dt: moment.unix(dt),
+        tz,
+        dt: moment.unix(dt).tz(tz), // timestamp
         icon: transformIcon({ id, icon }),
     });
 };

@@ -19,13 +19,6 @@ const Container = styled(Segment)`
     }
 `;
 
-const StyledHeader = styled(Header)`
-    && {
-        display: flex;
-        align-items: center;
-    }
-`;
-
 const StyledWeatherIcons = styled(WeatherIcons)`
     font-size: 2.5rem;
     margin-right: 5px;
@@ -68,20 +61,16 @@ const Current = ({
 }) => (
     <Container>
         <div>
-            <StyledHeader size="large">
-                <Header.Content>
-                    { city }
-                    { ', ' }
-                    { country }
-                    { /* <Header.Subheader>{ dt.format('ddd LT') }</Header.Subheader> */ }
-                </Header.Content>
-            </StyledHeader>
+            <Header size="large">
+                { city }
+                { ', ' }
+                { country }
+            </Header>
 
             <Label
                 icon="clock"
-                color="black"
-                content={dt.format('h:mm a')}
-                detail={dt.format('ddd')}
+                content={dt.format('ddd h:mm a')}
+                detail={dt.format('z')}
             />
         </div>
 
