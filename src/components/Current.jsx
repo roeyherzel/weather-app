@@ -8,14 +8,15 @@ import {
 import moment from 'moment';
 import styled from 'styled-components';
 
-import { Header, Segment, Label } from 'semantic-ui-react';
+import { Header, Label } from 'semantic-ui-react';
 import WeatherIcons from './WeatherIcons';
 
 
-const Container = styled(Segment)`
+const Container = styled.div`
     && {
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
 `;
 
@@ -44,11 +45,22 @@ const Deg = styled.span`
 
 const Description = styled.div`
     font-size: 1rem;
-    line-height: 2;
     text-transform: uppercase;
     text-align: center;
+    margin-top: 0.7rem;
 `;
 
+const StyledHeader = styled(Header)`
+    && {
+        margin-bottom: 5px;
+    }
+`;
+
+const StyledLabel = styled(Label)`
+    && {
+        margin-left: 0;
+    }
+`;
 
 const Current = ({
     data: {
@@ -61,19 +73,15 @@ const Current = ({
 }) => (
     <Container>
         <div>
-            <Header size="large">
-                { city }
-                { ', ' }
-                { country }
-            </Header>
-
-            <Label
+            <StyledHeader
+                content={`${city}, ${country}`}
+            />
+            <StyledLabel
                 icon="clock"
-                content={dt.format('ddd h:mm a')}
+                content={dt.format('h:mm a')}
                 detail={dt.format('z')}
             />
         </div>
-
 
         <TempContainer>
             <StyledWeatherIcons name={icon} />
