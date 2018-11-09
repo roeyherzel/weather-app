@@ -16,7 +16,7 @@ const withMyCitiesState = withStateHandlers({
     ]),
 });
 
-const withIsAddingState = withState('isAdding', 'setIsAdding', false);
+const withIsAddingState = withState('isAdding', 'setIsAdding', ({ myCities }) => (!myCities.length));
 const withIsEditingState = withState('isEditing', 'setIsEditing', false);
 
 

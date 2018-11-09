@@ -1,4 +1,5 @@
 import React from 'react';
+import { bool } from 'prop-types';
 import styled from 'styled-components';
 import { Segment, Button } from 'semantic-ui-react';
 import media, { sizes as mediaSizes } from '../styleUtils/media';
@@ -30,7 +31,9 @@ const H1 = styled.h1`
 const Main = styled.main`
 `;
 
-const Weather = () => (
+const Weather = ({
+    isAdding,
+}) => (
     <Page>
         <Segment>
             <Header>
@@ -41,10 +44,16 @@ const Weather = () => (
                 </Button.Group>
             </Header>
             <Main>
-                <AddCity />
+                { isAdding
+                    && <AddCity />
+                }
             </Main>
         </Segment>
     </Page>
 );
+
+Weather.propTypes = {
+    isAdding: bool.isRequired,
+};
 
 export default Weather;
