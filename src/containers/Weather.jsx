@@ -1,27 +1,23 @@
 import {
     compose,
-    withState,
     withStateHandlers,
 } from 'recompose';
 
 import Weather from '../components/Weather';
 
 
-const withMyCitiesState = withStateHandlers({
+const withWeatherState = withStateHandlers({
+    isAdding: true,
     myCities: [],
 }, {
-    addCity: ({ myCities }) => cityID => ([
-        ...myCities,
-        cityID,
-    ]),
+    toggleIsAdding: ({ isAdding }) => () => ({ isAdding: !isAdding }),
+
+    handleAddCity: ({ myCities }) => cityID => ({
+        myCities: [...myCities, cityID],
+        isAdding: false,
+    }),
 });
 
-const withIsAddingState = withState('isAdding', 'setIsAdding', ({ myCities }) => (!myCities.length));
-const withIsEditingState = withState('isEditing', 'setIsEditing', false);
-
-
 export default compose(
-    withMyCitiesState,
-    withIsAddingState,
-    withIsEditingState,
+    withWeatherState,
 )(Weather);

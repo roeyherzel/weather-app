@@ -23,6 +23,7 @@ const Item = styled.li`
 
 const AddCity = ({
     results,
+    handleAddCity,
     ...rest
 }) => (
     <div>
@@ -35,6 +36,7 @@ const AddCity = ({
                         <Button
                             compact
                             icon="add"
+                            onClick={() => handleAddCity(data.cityID)}
                         />
                         <Current data={data} />
                     </Item>

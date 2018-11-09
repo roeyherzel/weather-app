@@ -1,10 +1,11 @@
 import React from 'react';
-import { bool } from 'prop-types';
+import { bool, func } from 'prop-types';
 import styled from 'styled-components';
 import { Segment, Button } from 'semantic-ui-react';
 import media, { sizes as mediaSizes } from '../styleUtils/media';
 
 import AddCity from '../containers/AddCity';
+import ShowCities from '../components/ShowCities';
 
 
 const Page = styled.div`
@@ -33,6 +34,8 @@ const Main = styled.main`
 
 const Weather = ({
     isAdding,
+    myCities,
+    handleAddCity,
 }) => (
     <Page>
         <Segment>
@@ -45,7 +48,8 @@ const Weather = ({
             </Header>
             <Main>
                 { isAdding
-                    && <AddCity />
+                    ? <AddCity handleAddCity={handleAddCity} />
+                    : <ShowCities cities={myCities} />
                 }
             </Main>
         </Segment>
@@ -54,6 +58,7 @@ const Weather = ({
 
 Weather.propTypes = {
     isAdding: bool.isRequired,
+    handleAddCity: func.isRequired,
 };
 
 export default Weather;
