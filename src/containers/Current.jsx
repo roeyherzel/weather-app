@@ -1,20 +1,25 @@
 import {
+    setPropTypes,
     compose,
     branch,
     renderNothing,
     lifecycle,
     withState,
 } from 'recompose';
-
+import { number } from 'prop-types';
 import { getCityWeather } from '../api';
 
 import Current from '../components/Current';
 
 
+const withPropTypes = setPropTypes({
+    cityID: number.isRequired,
+});
+
 const withLifecycle = lifecycle({
     async componentDidMount() {
-        const { setLoading, setData } = this.props;
-        const data = await getCityWeather();
+        const { setLoading, setData, cityID } = this.props;
+        const data = await getCityWeather(cityID);
         setData(data);
         setLoading(false);
     },
@@ -30,6 +35,7 @@ const withLoadingBranch = branch(
 );
 
 export default compose(
+    withPropTypes,
     withLoadingState,
     withDataState,
     withLifecycle,
