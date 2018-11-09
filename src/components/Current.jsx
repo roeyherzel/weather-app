@@ -78,7 +78,7 @@ const Current = ({
             <div>
                 <Label
                     icon="clock"
-                    content={dt.format('h:mm')}
+                    content={dt.format('h:mma')}
                     detail={dt.format('z')}
                 />
             </div>

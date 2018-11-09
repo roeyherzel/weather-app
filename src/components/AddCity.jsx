@@ -36,7 +36,6 @@ const CityDropdown = ({
                     <Item key={data.cityID}>
                         <Button
                             compact
-                            color="twitter"
                             icon="add"
                         />
                         <Current data={data} />
