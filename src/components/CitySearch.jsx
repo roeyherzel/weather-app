@@ -8,27 +8,13 @@ import { Segment, Input, Button } from 'semantic-ui-react';
 import Current from './Current';
 
 
+const List = styled.div`
+`;
+
 const Item = styled.div`
     display: flex;
     align-items: stretch;
-    margin-top: 1rem;
-`;
-
-const StyledSegment = styled(Segment)`
-    && {
-        flex: 1;
-        margin: 0;
-        ${'' /* border-bottom-left-radius: 0;
-        border-top-left-radius: 0; */}
-    }
-`;
-
-const StyledButton = styled(Button)`
-    && {
-        ${'' /* margin: 0;
-        border-bottom-right-radius: 0;
-        border-top-right-radius: 0; */}
-    }
+    margin-bottom: 1rem;
 `;
 
 
@@ -38,8 +24,8 @@ const CityDropdown = ({
     cities,
 }) => (
     <div>
-
         <Segment inverted>
+            WeatherZone
             <Input
                 fluid
                 inverted
@@ -58,16 +44,18 @@ const CityDropdown = ({
         </Segment>
 
         { cities && (
-            <div>
+            <List>
                 { cities.map(data => (
-                    <Item>
-                        <StyledButton icon="add" />
-                        <StyledSegment>
-                            <Current key={data.cityID} data={data} />
-                        </StyledSegment>
+                    <Item key={data.cityID}>
+                        <Button
+                            compact
+                            color="twitter"
+                            icon="add"
+                        />
+                        <Current data={data} />
                     </Item>
                 )) }
-            </div>
+            </List>
         ) }
     </div>
 );
