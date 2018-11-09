@@ -23,7 +23,12 @@ const Row = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 2rem;
+`;
+
+const LabelsRow = styled.div`
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 5px;
 `;
 
 const Icon = styled(WeatherIcons)`
@@ -94,13 +99,14 @@ const Current = ({
             </TempContainer>
         </Row>
 
-        <Label
-            attached="bottom"
-            size="small"
-            icon="clock"
-            content={dt.format('HH:mm')}
-            detail={dt.format('z')}
-        />
+        <LabelsRow>
+            <Label
+                size="small"
+                icon="clock"
+                content={dt.format('HH:mm')}
+                detail={dt.format('z')}
+            />
+        </LabelsRow>
     </StyledSegment>
 );
 

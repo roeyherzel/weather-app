@@ -1,5 +1,5 @@
 import React from 'react';
-import { func } from 'prop-types';
+import { func, bool } from 'prop-types';
 import styled from 'styled-components';
 
 import { Input, Button } from 'semantic-ui-react';
@@ -19,6 +19,7 @@ const StyledInput = styled(Input)`
 // TODO: show no results
 // TODO: show error
 const Search = ({
+    isLoading,
     handleInputChange,
     handleSearch,
     toggleIsAdding,
@@ -34,6 +35,7 @@ const Search = ({
                 link: true,
                 onClick: handleSearch,
             }}
+            loading={isLoading}
             onKeyPress={handleSearch}
             onChange={handleInputChange}
         />
@@ -48,6 +50,7 @@ const Search = ({
 );
 
 Search.propTypes = {
+    isLoading: bool.isRequired,
     handleInputChange: func.isRequired,
     handleSearch: func.isRequired,
     toggleIsAdding: func.isRequired,

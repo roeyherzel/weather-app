@@ -1,5 +1,7 @@
 import React from 'react';
-import { arrayOf, shape, number } from 'prop-types';
+import {
+    func, arrayOf, shape, number,
+} from 'prop-types';
 import styled from 'styled-components';
 
 import { Button } from 'semantic-ui-react';
@@ -35,6 +37,7 @@ const AddCity = ({
                     <Item key={data.cityID}>
                         <Button
                             compact
+                            color="black"
                             icon="add"
                             onClick={() => handleAddCity(data.cityID)}
                         />
@@ -47,9 +50,8 @@ const AddCity = ({
 );
 
 AddCity.propTypes = {
-    results: arrayOf(shape({
-        cityID: number.isRequired,
-    }).isRequired),
+    results: arrayOf(shape({ cityID: number.isRequired }).isRequired),
+    handleAddCity: func.isRequired,
 };
 
 export default AddCity;
