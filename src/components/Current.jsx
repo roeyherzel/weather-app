@@ -52,14 +52,16 @@ const Deg = styled.span`
     color: ${p => p.theme.color.grey};
 `;
 
-const StyledHeader = styled.h2`
+const Location = styled.h2`
     font-size: 21px;
+    font-weight: 300;
+    color: ${p => p.theme.color.grey};
     margin-bottom: 5px;
 `;
 
 const StyledSubHeader = styled(Header)`
     && {
-        margin-top: 5px;
+        margin-top: 4px;
     }
 `;
 
@@ -74,11 +76,15 @@ const Current = ({
 }) => (
     <StyledSegment>
         <div>
-            <StyledHeader>{ `${city}, ${country}` }</StyledHeader>
+            <Location>
+                { city }
+                ,&nbsp;
+                { country }
+            </Location>
             <div>
                 <Label
                     icon="clock"
-                    content={dt.format('h:mma')}
+                    content={dt.format('HH:mm')}
                     detail={dt.format('z')}
                 />
             </div>

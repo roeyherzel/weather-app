@@ -7,7 +7,7 @@ import Weather from '../components/Weather';
 
 
 const withWeatherState = withStateHandlers({
-    isAdding: true,
+    isAdding: false,
     myCities: [],
 }, {
     toggleIsAdding: ({ isAdding }) => () => ({ isAdding: !isAdding }),
