@@ -6,7 +6,7 @@ import {
 } from 'recompose';
 import { search } from '../api';
 
-import CitySearch from '../components/CitySearch';
+import AddCity from '../components/AddCity';
 
 
 const withCitiesState = withState('cities', 'setCities', null);
@@ -29,4 +29,4 @@ export default compose(
     withCitiesState,
     withInputState,
     withSearchHandler,
-)(CitySearch);
+)(AddCity);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
 
-import Weather from './components/Weather';
+import Weather from './containers/Weather';
 
 
 const App = () => <Weather />;

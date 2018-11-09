@@ -24,14 +24,24 @@ const StyledSegment = styled(Segment)`
 
 const StyledWeatherIcons = styled(WeatherIcons)`
     font-size: 2.5rem;
-    margin-right: 10px;
+    margin-right: 5px;
 `;
 
 const WeatherContainer = styled.div`
     display: flex;
 `;
 
+const TempContainer = styled.div`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 1rem;
+`;
+
 const Temp = styled.span`
+    font-size: 4rem;
+    line-height: 0.8;
 `;
 
 const Deg = styled.span`
@@ -42,16 +52,14 @@ const Deg = styled.span`
     color: ${p => p.theme.color.grey};
 `;
 
-const TempContainer = styled.div`
-    position: relative;
-    font-size: 4rem;
-    line-height: 0.8;
-    margin-right: 1rem;
+const StyledHeader = styled.h2`
+    font-size: 21px;
+    margin-bottom: 5px;
 `;
 
-const StyledHeader = styled(Header)`
+const StyledSubHeader = styled(Header)`
     && {
-        margin-left: 5px;
+        margin-top: 5px;
     }
 `;
 
@@ -66,15 +74,13 @@ const Current = ({
 }) => (
     <StyledSegment>
         <div>
-            <StyledHeader content={`${city}, ${country}`} />
+            <StyledHeader>{ `${city}, ${country}` }</StyledHeader>
             <div>
                 <Label
                     icon="clock"
-                    content={dt.format('h:mm a')}
+                    content={dt.format('h:mm')}
                     detail={dt.format('z')}
                 />
-
-                <Label content={main} />
             </div>
         </div>
 
@@ -83,6 +89,11 @@ const Current = ({
 
             <TempContainer>
                 <Temp>53</Temp>
+                <StyledSubHeader
+                    sub
+                    color="grey"
+                    content={main}
+                />
                 <Deg>&deg;F</Deg>
             </TempContainer>
         </WeatherContainer>

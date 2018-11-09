@@ -4,14 +4,19 @@ import {
 } from 'prop-types';
 import styled from 'styled-components';
 
-import { Segment, Input, Button } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
+
+import Search from './Search';
 import Current from './Current';
 
 
-const List = styled.div`
+const List = styled.ul`
+    margin-top: 1rem;
+    list-style: none;
+    padding: 0;
 `;
 
-const Item = styled.div`
+const Item = styled.li`
     display: flex;
     align-items: stretch;
     margin-bottom: 1rem;
@@ -19,29 +24,11 @@ const Item = styled.div`
 
 
 const CityDropdown = ({
-    handleInputChange,
-    handleSearch,
     cities,
+    ...rest
 }) => (
     <div>
-        <Segment inverted>
-            WeatherZone
-            <Input
-                fluid
-                inverted
-                size="small"
-                placeholder="Search..."
-                icon={{
-                    name: 'search',
-                    circular: true,
-                    link: true,
-                    onClick: handleSearch,
-                }}
-                onKeyPress={handleSearch}
-                onChange={handleInputChange}
-            />
-
-        </Segment>
+        <Search {...rest} />
 
         { cities && (
             <List>
