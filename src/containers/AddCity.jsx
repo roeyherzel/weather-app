@@ -9,7 +9,7 @@ import { search } from '../api';
 import AddCity from '../components/AddCity';
 
 
-const withCitiesState = withState('cities', 'setCities', null);
+const withCitiesState = withState('results', 'setResults', null);
 
 const withInputState = withStateHandlers({
     inputValue: '',
@@ -18,9 +18,11 @@ const withInputState = withStateHandlers({
 });
 
 const withSearchHandler = withHandlers({
-    handleSearch: ({ inputValue, setCities }) => ({ key }) => {
+    handleSearch: ({ inputValue, setResults }) => ({ key }) => {
         if (key === undefined || key === 'Enter') {
-            search(inputValue).then(setCities);
+            // TODO: handle error
+            search(inputValue)
+                .then(setResults);
         }
     },
 });

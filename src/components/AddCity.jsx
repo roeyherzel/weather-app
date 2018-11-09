@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-    func, arrayOf, shape, number,
-} from 'prop-types';
+import { arrayOf, shape, number } from 'prop-types';
 import styled from 'styled-components';
 
 import { Button } from 'semantic-ui-react';
@@ -23,16 +21,16 @@ const Item = styled.li`
 `;
 
 
-const CityDropdown = ({
-    cities,
+const AddCity = ({
+    results,
     ...rest
 }) => (
     <div>
         <Search {...rest} />
 
-        { cities && (
+        { results && (
             <List>
-                { cities.map(data => (
+                { results.map(data => (
                     <Item key={data.cityID}>
                         <Button
                             compact
@@ -46,12 +44,10 @@ const CityDropdown = ({
     </div>
 );
 
-CityDropdown.propTypes = {
-    handleInputChange: func.isRequired,
-    handleSearch: func.isRequired,
-    cities: arrayOf(shape({
+AddCity.propTypes = {
+    results: arrayOf(shape({
         cityID: number.isRequired,
     }).isRequired),
 };
 
-export default CityDropdown;
+export default AddCity;
