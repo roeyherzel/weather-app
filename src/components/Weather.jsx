@@ -1,7 +1,7 @@
 import React from 'react';
 import { bool, func, array } from 'prop-types';
 import styled from 'styled-components';
-import { Segment, Button } from 'semantic-ui-react';
+import { Segment, Header, Button } from 'semantic-ui-react';
 import media, { sizes as mediaSizes } from '../styleUtils/media';
 
 import AddCity from '../containers/AddCity';
@@ -18,19 +18,15 @@ const Page = styled.div`
     `};
 `;
 
-const H1 = styled.h1`
-    margin-bottom: 1rem;
-`;
-
 const ActionRow = styled.div`
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
 `;
 
-const StyledButtonGroup = styled(Button.Group)`
+const UnitsButtonGroup = styled(Button.Group)`
     && {
-        margin-left: auto;
+        margin-right: auto;
     }
 `;
 
@@ -40,24 +36,32 @@ const Weather = ({
     handleAddCity,
 }) => (
     <Page>
-        <Segment>
-            <header>
-                <H1>WeatherZone</H1>
-                <ActionRow>
-                    <Button icon="setting" basic size="small" circular />
-                    <Button icon="add" basic size="small" circular />
-                    <StyledButtonGroup basic size="mini">
-                        <Button active>C&deg;</Button>
-                        <Button>F&deg;</Button>
-                    </StyledButtonGroup>
-                </ActionRow>
-            </header>
-            <main>
+        <Header
+            inverted
+            attached="top"
+            textAlign="center"
+            content="WeatherZone"
+        />
+        <Segment attached>
+            <ActionRow>
+                <UnitsButtonGroup basic size="mini">
+                    <Button active>C&deg;</Button>
+                    <Button>F&deg;</Button>
+                </UnitsButtonGroup>
+
+                { !isAdding
+                    && <Button icon="add" basic circular size="small" />
+                }
+
+                <Button icon="setting" basic circular size="small" />
+            </ActionRow>
+
+            <div>
                 { isAdding
                     ? <AddCity handleAddCity={handleAddCity} />
                     : <ShowCities cities={myCities} />
                 }
-            </main>
+            </div>
         </Segment>
     </Page>
 );

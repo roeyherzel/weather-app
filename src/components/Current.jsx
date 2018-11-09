@@ -16,7 +16,7 @@ const StyledSegment = styled(Segment)`
     && {
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
         width: 100%;
         margin-top: 0;
     }
