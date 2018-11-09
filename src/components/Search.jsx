@@ -12,13 +12,14 @@ const Container = styled.div`
 const StyledInput = styled(Input)`
     && {
         flex: 1;
-        margin-right: 1rem;
+        margin-right: 5px;
     }
 `;
 
 const Search = ({
     handleInputChange,
     handleSearch,
+    toggleIsAdding,
 }) => (
     <Container>
         <StyledInput
@@ -35,13 +36,18 @@ const Search = ({
             onChange={handleInputChange}
         />
 
-        <Button size="small" icon="cancel" circular />
+        <Button
+            size="small"
+            icon="cancel"
+            onClick={toggleIsAdding}
+        />
     </Container>
 );
 
 Search.propTypes = {
     handleInputChange: func.isRequired,
     handleSearch: func.isRequired,
+    toggleIsAdding: func.isRequired,
 };
 
 export default Search;

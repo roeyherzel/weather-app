@@ -21,7 +21,7 @@ const Page = styled.div`
 const ActionRow = styled.div`
     display: flex;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 `;
 
 const UnitsButtonGroup = styled(Button.Group)`
@@ -34,6 +34,7 @@ const Weather = ({
     isAdding,
     myCities,
     handleAddCity,
+    toggleIsAdding,
 }) => (
     <Page>
         <Header
@@ -49,16 +50,22 @@ const Weather = ({
                     <Button>F&deg;</Button>
                 </UnitsButtonGroup>
 
-                { !isAdding
-                    && <Button icon="add" basic circular size="small" />
-                }
+                { !isAdding && (
+                    <Button
+                        basic
+                        circular
+                        icon="add"
+                        size="small"
+                        onClick={toggleIsAdding}
+                    />
+                ) }
 
                 <Button icon="setting" basic circular size="small" />
             </ActionRow>
 
             <div>
                 { isAdding
-                    ? <AddCity handleAddCity={handleAddCity} />
+                    ? <AddCity handleAddCity={handleAddCity} toggleIsAdding={toggleIsAdding} />
                     : <ShowCities cities={myCities} />
                 }
             </div>
@@ -68,8 +75,9 @@ const Weather = ({
 
 Weather.propTypes = {
     isAdding: bool.isRequired,
-    handleAddCity: func.isRequired,
     myCities: array.isRequired,
+    handleAddCity: func.isRequired,
+    toggleIsAdding: func.isRequired,
 };
 
 export default Weather;
