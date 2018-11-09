@@ -21,6 +21,9 @@ export const transformCurrentWeather = ({
     sys: {
         country,
     },
+    main: {
+        temp,
+    },
 }) => {
     const {
         id, icon, main, description,
@@ -36,6 +39,7 @@ export const transformCurrentWeather = ({
         coord,
         main,
         description,
+        temp: Math.round(temp),
         tz,
         dt: moment.unix(dt).tz(tz), // timestamp
         icon: transformIcon({ id, icon }),

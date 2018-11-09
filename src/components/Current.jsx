@@ -23,12 +23,7 @@ const Row = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-`;
-
-const LabelsRow = styled.div`
-    display: flex;
-    flex-direction: row-reverse;
-    margin-top: 2px;
+    margin-bottom: 2rem;
 `;
 
 const Icon = styled(WeatherIcons)`
@@ -39,6 +34,7 @@ const Icon = styled(WeatherIcons)`
 const TempContainer = styled.div`
     position: relative;
     display: flex;
+    align-items: center;
     margin-right: 1rem;
 `;
 
@@ -75,6 +71,7 @@ const Current = ({
         city,
         country,
         main,
+        temp,
     },
 }) => (
     <StyledSegment>
@@ -92,19 +89,18 @@ const Current = ({
 
             <TempContainer>
                 <Icon name={icon} />
-                <Temp>53</Temp>
-                <Deg>&deg;F</Deg>
+                <Temp>{ temp }</Temp>
+                <Deg>&deg;C</Deg>
             </TempContainer>
         </Row>
 
-        <LabelsRow>
-            <Label
-                size="small"
-                icon="clock"
-                content={dt.format('HH:mm')}
-                detail={dt.format('z')}
-            />
-        </LabelsRow>
+        <Label
+            attached="bottom"
+            size="small"
+            icon="clock"
+            content={dt.format('HH:mm')}
+            detail={dt.format('z')}
+        />
     </StyledSegment>
 );
 
