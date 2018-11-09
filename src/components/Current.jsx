@@ -25,15 +25,20 @@ const StyledWeatherIcons = styled(WeatherIcons)`
     margin-right: 5px;
 `;
 
-const TempContainer = styled.div`
+const WeatherContainer = styled.div`
     display: flex;
 `;
 
-const Temp = styled.div`
+const TempContainer = styled.div`
     position: relative;
     font-size: 4rem;
+    color: ${p => p.theme.color.grey};
     line-height: 0.8;
     margin-right: 1rem;
+`;
+
+const Temp = styled.span`
+    color: ${p => p.theme.color.teal};
 `;
 
 const Deg = styled.span`
@@ -52,6 +57,7 @@ const Description = styled.div`
 
 const StyledHeader = styled(Header)`
     && {
+        margin-left: 5px;
         margin-bottom: 5px;
     }
 `;
@@ -83,15 +89,14 @@ const Current = ({
             />
         </div>
 
-        <TempContainer>
+        <WeatherContainer>
             <StyledWeatherIcons name={icon} />
-
-            <Temp>
-                <span>53</span>
+            <TempContainer>
+                <Temp>53</Temp>
                 <Description>{ main }</Description>
                 <Deg>&deg;F</Deg>
-            </Temp>
-        </TempContainer>
+            </TempContainer>
+        </WeatherContainer>
     </Container>
 );
 
