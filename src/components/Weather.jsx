@@ -21,7 +21,6 @@ const Page = styled.div`
 const ActionRow = styled.div`
     display: flex;
     align-items: center;
-    margin-bottom: 1.5rem;
 `;
 
 const UnitsButtonGroup = styled(Button.Group)`
@@ -44,24 +43,23 @@ const Weather = ({
             content="WeatherZone"
         />
         <Segment attached>
-            <ActionRow>
-                <UnitsButtonGroup basic size="mini">
-                    <Button active>C&deg;</Button>
-                    <Button>F&deg;</Button>
-                </UnitsButtonGroup>
+            { !isAdding && (
+                <ActionRow>
+                    <UnitsButtonGroup basic size="mini">
+                        <Button active>C&deg;</Button>
+                        <Button>F&deg;</Button>
+                    </UnitsButtonGroup>
 
-                { !isAdding && (
+                    <Button icon="setting" circular size="small" />
+
                     <Button
-                        basic
                         circular
                         icon="add"
                         size="small"
                         onClick={toggleIsAdding}
                     />
-                ) }
-
-                <Button icon="setting" basic circular size="small" />
-            </ActionRow>
+                </ActionRow>
+            ) }
 
             <div>
                 { isAdding

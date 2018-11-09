@@ -2,16 +2,20 @@ import React from 'react';
 import { arrayOf } from 'prop-types';
 import styled from 'styled-components';
 
-import { Button } from 'semantic-ui-react';
 import Current from '../containers/Current';
+
+
+const List = styled.div`
+    margin-top: 1.5rem;
+`;
 
 
 const ShowCities = ({
     cities,
 }) => (
-    <div>
+    <List>
         { cities.map(id => <Current key={id} cityID={id} />) }
-    </div>
+    </List>
 );
 
 export default ShowCities;
