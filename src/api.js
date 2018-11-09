@@ -28,12 +28,13 @@ export async function getCityWeather(cityID = portlandCityID) {
 }
 
 export async function search(query) {
+    // TODO: replace '-' with space
     try {
         const { data } = await axios.get(`${API}/find`, {
             params: {
                 ...baseParams,
                 q: query,
-                type: 'like',
+                type: 'accurate',
             },
         });
 

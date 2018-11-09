@@ -16,6 +16,8 @@ const StyledInput = styled(Input)`
     }
 `;
 
+// TODO: show no results
+// TODO: show error
 const Search = ({
     handleInputChange,
     handleSearch,
@@ -36,6 +38,7 @@ const Search = ({
             onChange={handleInputChange}
         />
 
+        { /* TODO: hide cancel if myCities is empty */ }
         <Button
             size="small"
             icon="cancel"

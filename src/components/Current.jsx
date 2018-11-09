@@ -14,28 +14,31 @@ import WeatherIcons from './WeatherIcons';
 
 const StyledSegment = styled(Segment)`
     && {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
         width: 100%;
         margin-top: 0;
     }
 `;
 
-const StyledWeatherIcons = styled(WeatherIcons)`
-    font-size: 2.5rem;
-    margin-right: 5px;
+const Row = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 `;
 
-const WeatherContainer = styled.div`
+const LabelsRow = styled.div`
     display: flex;
+    flex-direction: row-reverse;
+    margin-top: 2px;
+`;
+
+const Icon = styled(WeatherIcons)`
+    font-size: 2.5rem;
+    margin-right: 5px;
 `;
 
 const TempContainer = styled.div`
     position: relative;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     margin-right: 1rem;
 `;
 
@@ -49,7 +52,6 @@ const Deg = styled.span`
     top: 0;
     left: 100%;
     font-size: 1rem;
-    color: ${p => p.theme.color.grey};
 `;
 
 const Location = styled.h2`
@@ -59,9 +61,10 @@ const Location = styled.h2`
     margin-bottom: 5px;
 `;
 
-const StyledSubHeader = styled(Header)`
+const Condition = styled(Header)`
     && {
-        margin-top: 4px;
+        margin-top: 0;
+        margin-bottom: 2px;
     }
 `;
 
@@ -75,34 +78,33 @@ const Current = ({
     },
 }) => (
     <StyledSegment>
-        <div>
-            <Location>
-                { city }
-                ,&nbsp;
-                { country }
-            </Location>
+        <Row>
             <div>
-                <Label
-                    icon="clock"
-                    content={dt.format('HH:mm')}
-                    detail={dt.format('z')}
-                />
+                <Location>
+                    { city }
+                    ,&nbsp;
+                    { country }
+                </Location>
+                <Condition sub color="grey">
+                    { main }
+                </Condition>
             </div>
-        </div>
-
-        <WeatherContainer>
-            <StyledWeatherIcons name={icon} />
 
             <TempContainer>
+                <Icon name={icon} />
                 <Temp>53</Temp>
-                <StyledSubHeader
-                    sub
-                    color="grey"
-                    content={main}
-                />
                 <Deg>&deg;F</Deg>
             </TempContainer>
-        </WeatherContainer>
+        </Row>
+
+        <LabelsRow>
+            <Label
+                size="small"
+                icon="clock"
+                content={dt.format('HH:mm')}
+                detail={dt.format('z')}
+            />
+        </LabelsRow>
     </StyledSegment>
 );
 
