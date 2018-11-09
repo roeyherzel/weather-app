@@ -11,7 +11,7 @@ import { getCityWeather } from '../api';
 
 import Current from '../components/Current';
 
-
+// TODO: take data prop to save from fetching again when adding from search
 const withPropTypes = setPropTypes({
     cityID: number.isRequired,
 });

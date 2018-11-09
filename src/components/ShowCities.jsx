@@ -2,6 +2,7 @@ import React from 'react';
 import { arrayOf } from 'prop-types';
 import styled from 'styled-components';
 
+import { Button } from 'semantic-ui-react';
 import Current from '../containers/Current';
 
 

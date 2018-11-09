@@ -1,11 +1,11 @@
 import React from 'react';
-import { bool, func } from 'prop-types';
+import { bool, func, array } from 'prop-types';
 import styled from 'styled-components';
 import { Segment, Button } from 'semantic-ui-react';
 import media, { sizes as mediaSizes } from '../styleUtils/media';
 
 import AddCity from '../containers/AddCity';
-import ShowCities from '../components/ShowCities';
+import ShowCities from './ShowCities';
 
 
 const Page = styled.div`
@@ -18,18 +18,20 @@ const Page = styled.div`
     `};
 `;
 
-const Header = styled.header`
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-`;
-
 const H1 = styled.h1`
-    margin-bottom: 0;
+    margin-bottom: 1rem;
 `;
 
-const Main = styled.main`
+const ActionRow = styled.div`
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+`;
+
+const StyledButtonGroup = styled(Button.Group)`
+    && {
+        margin-left: auto;
+    }
 `;
 
 const Weather = ({
@@ -39,19 +41,23 @@ const Weather = ({
 }) => (
     <Page>
         <Segment>
-            <Header>
+            <header>
                 <H1>WeatherZone</H1>
-                <Button.Group size="mini">
-                    <Button secondary>C&deg;</Button>
-                    <Button>F&deg;</Button>
-                </Button.Group>
-            </Header>
-            <Main>
+                <ActionRow>
+                    <Button icon="setting" basic size="small" circular />
+                    <Button icon="add" basic size="small" circular />
+                    <StyledButtonGroup basic size="mini">
+                        <Button active>C&deg;</Button>
+                        <Button>F&deg;</Button>
+                    </StyledButtonGroup>
+                </ActionRow>
+            </header>
+            <main>
                 { isAdding
                     ? <AddCity handleAddCity={handleAddCity} />
                     : <ShowCities cities={myCities} />
                 }
-            </Main>
+            </main>
         </Segment>
     </Page>
 );
@@ -59,6 +65,7 @@ const Weather = ({
 Weather.propTypes = {
     isAdding: bool.isRequired,
     handleAddCity: func.isRequired,
+    myCities: array.isRequired,
 };
 
 export default Weather;
