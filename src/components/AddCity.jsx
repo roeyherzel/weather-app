@@ -4,7 +4,7 @@ import {
 } from 'prop-types';
 import styled from 'styled-components';
 
-import { Button } from 'semantic-ui-react';
+import { Button, Message } from 'semantic-ui-react';
 
 import Search from './Search';
 import Current from './Current';

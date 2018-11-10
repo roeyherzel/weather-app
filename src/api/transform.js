@@ -45,3 +45,9 @@ export const transformCurrentWeather = ({
         icon: transformIcon({ id, icon }),
     });
 };
+
+export const transformError = ({
+    response: { data, status, statusText },
+}) => (data
+    ? `Error: ${data.message} (${data.cod})`
+    : `Error: ${statusText} (${status})`);

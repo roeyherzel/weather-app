@@ -7,7 +7,7 @@ import {
     withState,
 } from 'recompose';
 import { number } from 'prop-types';
-import { getCityWeather } from '../api';
+import api from '../api';
 
 import Current from '../components/Current';
 
@@ -19,7 +19,7 @@ const withPropTypes = setPropTypes({
 const withLifecycle = lifecycle({
     async componentDidMount() {
         const { setLoading, setData, cityID } = this.props;
-        const data = await getCityWeather(cityID);
+        const data = await api.getCityWeather(cityID);
         setData(data);
         setLoading(false);
     },
