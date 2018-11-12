@@ -37,7 +37,6 @@ const AddCity = ({
                     <Item key={data.cityID}>
                         <Button
                             compact
-                            color="black"
                             icon="add"
                             onClick={() => handleAddCity(data.cityID)}
                         />

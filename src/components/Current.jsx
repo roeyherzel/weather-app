@@ -101,6 +101,7 @@ const Current = ({
 
         <LabelsRow>
             <Label
+                basic
                 size="small"
                 icon="clock"
                 content={dt.format('HH:mm')}

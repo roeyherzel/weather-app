@@ -57,7 +57,6 @@ const Search = ({
 
         { /* TODO: hide cancel if myCities is empty */ }
         <Button
-            basic
             size="small"
             icon="cancel"
             onClick={toggleIsAdding}
