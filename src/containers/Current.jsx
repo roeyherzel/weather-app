@@ -5,11 +5,15 @@ import {
     renderNothing,
     lifecycle,
     withState,
+    mapProps,
+    getContext,
 } from 'recompose';
 import { number } from 'prop-types';
+import moment from 'moment-timezone';
 import api from '../api';
 
 import Current from '../components/Current';
+
 
 // TODO: take data prop to save from fetching again when adding from search
 const withPropTypes = setPropTypes({
@@ -34,10 +38,24 @@ const withLoadingBranch = branch(
     renderNothing,
 );
 
+const withWeatherContext = getContext({ timestamp: number });
+
+const withMappedProps = mapProps(({
+    timestamp,
+    data: { tz, ...data },
+}) => ({
+    data: {
+        ...data,
+        dt: moment(timestamp).tz(tz),
+    },
+}));
+
 export default compose(
     withPropTypes,
     withLoadingState,
     withDataState,
+    withWeatherContext,
     withLifecycle,
     withLoadingBranch,
+    withMappedProps,
 )(Current);

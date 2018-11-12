@@ -41,7 +41,8 @@ export const transformCurrentWeather = ({
         description,
         temp: Math.round(temp),
         tz,
-        dt: moment.unix(dt).tz(tz), // timestamp
+        dt: moment.tz(tz),
+        last_update: moment.unix(dt).tz(tz), // timestamp
         icon: transformIcon({ id, icon }),
     });
 };
