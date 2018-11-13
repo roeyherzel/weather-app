@@ -9,7 +9,7 @@ import moment from 'moment';
 import styled from 'styled-components';
 
 import { Segment, Header, Label } from 'semantic-ui-react';
-import WeatherIcons from './WeatherIcons';
+import WeatherIcons from '../WeatherIcons';
 
 
 const StyledSegment = styled(Segment)`
