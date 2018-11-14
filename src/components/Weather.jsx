@@ -7,7 +7,7 @@ import { Segment, Header } from 'semantic-ui-react';
 import media, { sizes as mediaSizes } from '../styleUtils/media';
 
 import AddCity from '../containers/AddCity';
-import ShowCities from './ShowCities';
+import ShowCities from '../containers/ShowCities';
 
 
 const Page = styled.div`
@@ -47,7 +47,7 @@ Weather.propTypes = {
     isAdding: bool.isRequired,
     myCities: array.isRequired,
     handleAddCity: func.isRequired,
-    handleSetUnit: func.isRequired,
+    handleSetUnits: func.isRequired,
     toggleIsAdding: func.isRequired,
 };
 

@@ -9,22 +9,6 @@ const baseParams = {
     appid: KEY,
 };
 
-export async function getCityWeather({ id, units }) {
-    try {
-        const { data } = await axios.get(`${API}/weather`, {
-            params: {
-                ...baseParams,
-                id,
-                units,
-            },
-        });
-        return transformCurrentWeather(data);
-
-    } catch (error) {
-        throw error;
-    }
-}
-
 export async function search({ q, units }) {
     // TODO: replace '-' with space
     try {
@@ -34,6 +18,23 @@ export async function search({ q, units }) {
                 q,
                 units,
                 type: 'accurate',
+            },
+        });
+
+        return data.list.map(transformCurrentWeather);
+
+    } catch (error) {
+        throw error;
+    }
+}
+
+export async function getGroup({ id, units }) {
+    try {
+        const { data } = await axios.get(`${API}/group`, {
+            params: {
+                ...baseParams,
+                id,
+                units,
             },
         });
 

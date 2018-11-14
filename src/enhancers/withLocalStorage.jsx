@@ -7,8 +7,10 @@ export const getStorage = () => new Map(JSON.parse(localStorage.getItem(storage_
 
 const setStorage = storage => localStorage.setItem(storage_name, JSON.stringify(storage));
 
+
 const enhance = (...storage_props) => compose(
     setDisplayName('withLocalStorage'),
+
     lifecycle({
         componentDidMount() {
             const storage = getStorage();

@@ -17,14 +17,14 @@ const List = styled.div`
 
 
 const ShowCities = ({
-    myCities,
     units,
-    handleSetUnit,
+    cities,
+    handleSetUnits,
     toggleIsAdding,
 }) => (
     <div>
         <ActionRow>
-            <UnitButtons units={units} handleSetUnit={handleSetUnit} />
+            <UnitButtons units={units} handleSetUnits={handleSetUnits} />
 
             <Button
                 circular
@@ -41,7 +41,7 @@ const ShowCities = ({
         </ActionRow>
 
         <List>
-            { myCities.map(id => <Current key={id} cityID={id} />) }
+            { cities.map(({ cityID, ...data }) => <Current key={cityID} data={data} />) }
         </List>
     </div>
 );
