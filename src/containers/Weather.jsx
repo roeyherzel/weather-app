@@ -8,27 +8,12 @@ import {
 } from 'recompose';
 import { number, oneOf, arrayOf } from 'prop-types';
 
-import withLocalStorage from '../enhancers/withLocalStorage';
+import withLocalStorage, { getStorage } from '../enhancers/withLocalStorage';
 import Weather from '../components/Weather';
 
 
-// const initialState = {
-//     myCities: [],
-//     units: 'metric',
-// };
-
-// const serialState = JSON.stringify(initialState);
-
-// const loadState = JSON.parse(serialState);
-
-const getStorageProp = (prop) => {
-    const res = new Map(JSON.parse(localStorage.getItem('cache')));
-    console.log(res.get(prop));
-    return res.get(prop);
-};
-
 const withWeatherState = withStateHandlers(() => {
-    const myCities = getStorageProp('myCities') || [];
+    const myCities = getStorage().get('myCities') || [];
     const isAdding = !myCities.length;
 
     return { myCities, isAdding };
@@ -63,7 +48,7 @@ const withTimeTick = compose(
     }),
 );
 
-const withUnitsState = withState('units', 'handleSetUnit', getStorageProp('units') || 'metric');
+const withUnitsState = withState('units', 'handleSetUnit', getStorage().get('units') || 'metric');
 
 const withWeatherContext = withContext({
     units: oneOf(['metric', 'imperial']),
