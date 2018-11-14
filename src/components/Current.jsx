@@ -7,9 +7,10 @@ import {
 } from 'prop-types';
 import moment from 'moment';
 import styled from 'styled-components';
-
 import { Segment, Header, Label } from 'semantic-ui-react';
+
 import WeatherIcons from '../WeatherIcons';
+import Degree from './Degree';
 
 
 const StyledSegment = styled(Segment)`
@@ -37,22 +38,13 @@ const Icon = styled(WeatherIcons)`
 `;
 
 const TempContainer = styled.div`
-    position: relative;
     display: flex;
     align-items: center;
-    margin-right: 1rem;
 `;
 
 const Temp = styled.span`
     font-size: 4rem;
     line-height: 0.8;
-`;
-
-const Deg = styled.span`
-    position: absolute;
-    top: 0;
-    left: 100%;
-    font-size: 1rem;
 `;
 
 const Location = styled.h2`
@@ -95,7 +87,7 @@ const Current = ({
             <TempContainer>
                 <Icon name={icon} />
                 <Temp>{ temp }</Temp>
-                <Deg>&deg;C</Deg>
+                <Degree />
             </TempContainer>
         </Row>
 
