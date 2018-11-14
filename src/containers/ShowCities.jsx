@@ -1,10 +1,8 @@
 import {
-    branch,
     compose,
     lifecycle,
     withState,
     withHandlers,
-    renderNothing,
     setDisplayName,
 } from 'recompose';
 
@@ -14,7 +12,6 @@ import ShowCities from '../components/ShowCities';
 
 
 const withLoadingState = withState('isLoading', 'setLoading', true);
-
 const withCitiesState = withState('cities', 'setCitiesData', null);
 
 const withFetchCities = compose(
@@ -53,14 +50,8 @@ const withFetchCities = compose(
     }),
 );
 
-const withLoadingBranch = branch(
-    ({ isLoading }) => isLoading,
-    renderNothing,
-);
-
 export default compose(
     withLoadingState,
     withCitiesState,
     withFetchCities,
-    withLoadingBranch,
 )(ShowCities);

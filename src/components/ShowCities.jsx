@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button } from 'semantic-ui-react';
 
+import Spinner from './Spinner';
 import Current from '../containers/Current';
 import UnitButtons from './UnitButtons';
 
@@ -17,6 +18,7 @@ const List = styled.div`
 
 
 const ShowCities = ({
+    isLoading,
     units,
     cities,
     handleSetUnits,
@@ -40,9 +42,14 @@ const ShowCities = ({
             />
         </ActionRow>
 
-        <List>
-            { cities.map(({ cityID, ...data }) => <Current key={cityID} data={data} />) }
-        </List>
+        { isLoading
+            ? <Spinner />
+            : (
+                <List>
+                    { cities.map(({ cityID, ...data }) => <Current key={cityID} data={data} />) }
+                </List>
+            )
+        }
     </div>
 );
 

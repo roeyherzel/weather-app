@@ -49,7 +49,11 @@ const AddCity = ({
 );
 
 AddCity.propTypes = {
-    results: arrayOf(shape({ cityID: number.isRequired }).isRequired),
+    results: arrayOf(
+        shape({
+            cityID: number.isRequired,
+        }).isRequired,
+    ),
     handleAddCity: func.isRequired,
 };
 
