@@ -1,11 +1,14 @@
 import React from 'react';
-import { bool, func, array } from 'prop-types';
+import {
+    string, bool, func, array,
+} from 'prop-types';
 import styled from 'styled-components';
 import { Segment, Header, Button } from 'semantic-ui-react';
 import media, { sizes as mediaSizes } from '../styleUtils/media';
 
 import AddCity from '../containers/AddCity';
 import ShowCities from './ShowCities';
+import UnitButtons from './UnitButtons';
 
 
 const Page = styled.div`
@@ -23,16 +26,13 @@ const ActionRow = styled.div`
     align-items: center;
 `;
 
-const UnitsButtonGroup = styled(Button.Group)`
-    && {
-        margin-right: auto;
-    }
-`;
 
 const Weather = ({
+    unit,
     isAdding,
     myCities,
     handleAddCity,
+    handleSetUnit,
     toggleIsAdding,
 }) => (
     <Page>
@@ -45,12 +45,13 @@ const Weather = ({
         <Segment attached>
             { !isAdding && (
                 <ActionRow>
-                    <UnitsButtonGroup basic size="mini">
-                        <Button active>C&deg;</Button>
-                        <Button>F&deg;</Button>
-                    </UnitsButtonGroup>
+                    <UnitButtons unit={unit} handleSetUnit={handleSetUnit} />
 
-                    <Button icon="setting" circular size="small" />
+                    <Button
+                        circular
+                        icon="setting"
+                        size="small"
+                    />
 
                     <Button
                         circular
@@ -72,9 +73,11 @@ const Weather = ({
 );
 
 Weather.propTypes = {
+    unit: string.isRequired,
     isAdding: bool.isRequired,
     myCities: array.isRequired,
     handleAddCity: func.isRequired,
+    handleSetUnit: func.isRequired,
     toggleIsAdding: func.isRequired,
 };
 

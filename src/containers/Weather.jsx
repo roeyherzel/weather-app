@@ -31,6 +31,8 @@ const withWeatherState = withStateHandlers({
     updateTimestamp: () => () => ({ timestamp: Date.now() }),
 
     setTimestampIntervalID: () => timestampIntervalID => ({ timestampIntervalID }),
+
+    handleSetUnit: () => unit => ({ unit }),
 });
 
 export const weatherContext = {
