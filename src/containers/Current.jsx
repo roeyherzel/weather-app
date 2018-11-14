@@ -5,40 +5,50 @@ import {
     renderNothing,
     lifecycle,
     withState,
+    withHandlers,
     mapProps,
     getContext,
 } from 'recompose';
-import { number } from 'prop-types';
+import { number, oneOf } from 'prop-types';
 import moment from 'moment-timezone';
 import api from '../api';
 
 import Current from '../components/Current';
 
 
-// TODO: take data prop to save from fetching again when adding from search
-const withPropTypes = setPropTypes({
-    cityID: number.isRequired,
-});
-
-const withLifecycle = lifecycle({
-    async componentDidMount() {
-        const { setLoading, setData, cityID } = this.props;
-        const data = await api.getCityWeather(cityID);
+const withFetchHandler = withHandlers({
+    handleFetch: ({
+        setLoading,
+        setData,
+        cityID,
+        units,
+    }) => async () => {
+        setLoading(true);
+        const data = await api.getCityWeather({ id: cityID, units });
         setData(data);
         setLoading(false);
     },
 });
 
-const withLoadingState = withState('isLoading', 'setLoading', true);
+const withLifecycle = lifecycle({
+    componentDidMount() {
+        this.props.handleFetch();
+    },
 
+    componentDidUpdate(prevProps) {
+        if (this.props.units !== prevProps.units) {
+            this.props.handleFetch();
+        }
+    },
+});
+
+const withLoadingState = withState('isLoading', 'setLoading', true);
 const withDataState = withState('data', 'setData', null);
 
 const withLoadingBranch = branch(
     ({ isLoading }) => isLoading,
     renderNothing,
 );
-
-const withWeatherContext = getContext({ timestamp: number });
 
 const withMappedProps = mapProps(({
     timestamp,
@@ -51,10 +61,16 @@ const withMappedProps = mapProps(({
 }));
 
 export default compose(
-    withPropTypes,
+    setPropTypes({
+        // TODO: take data prop to save from fetching again when adding from search
+        cityID: number.isRequired,
+    }),
+    getContext({
+        units: oneOf(['metric', 'imperial']),
+    }),
     withLoadingState,
     withDataState,
-    withWeatherContext,
+    withFetchHandler,
     withLifecycle,
     withLoadingBranch,
     withMappedProps,

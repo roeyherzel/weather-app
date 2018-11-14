@@ -1,7 +1,9 @@
+import { oneOf } from 'prop-types';
 import {
     compose,
     withStateHandlers,
     withHandlers,
+    getContext,
 } from 'recompose';
 import api from '../api';
 import { transformError } from '../api/transform';
@@ -16,8 +18,6 @@ const withSearchState = withStateHandlers({
     message: null,
     error: false,
 }, {
-    handleInputChange: () => (e, { value }) => ({ inputValue: value }),
-
     setResults: () => results => ({
         results,
         message: !results.length ? 'No results found' : null,
@@ -31,6 +31,8 @@ const withSearchState = withStateHandlers({
     setMessage: () => message => ({ message, error: true }),
 
     clearMessgae: () => () => ({ message: null, error: false }),
+
+    handleInputChange: () => (e, { value }) => ({ inputValue: value }),
 });
 
 const withSearchHandler = withHandlers({
@@ -41,6 +43,7 @@ const withSearchHandler = withHandlers({
         setResults,
         setIsLoading,
         setMessage,
+        units,
     }) => async ({ key, type }) => {
         const isKeyEnter = (type === 'keypress' && key === 'Enter');
         const isMouseClick = (type === 'click' && key === undefined);
@@ -50,7 +53,6 @@ const withSearchHandler = withHandlers({
         }
 
         if (inputValue.length < 3) {
-            console.log(inputValue.length, inputValue);
             return setMessage('Requires minimum 3 characters');
         }
 
@@ -59,7 +61,7 @@ const withSearchHandler = withHandlers({
         setIsLoading(true);
 
         try {
-            const results = await api.search(inputValue);
+            const results = await api.search({ q: inputValue, units });
             setResults(results);
             setIsLoading(false);
         } catch (error) {
@@ -70,6 +72,9 @@ const withSearchHandler = withHandlers({
 });
 
 export default compose(
+    getContext({
+        units: oneOf(['metric', 'imperial']),
+    }),
     withSearchState,
     withSearchHandler,
 )(AddCity);

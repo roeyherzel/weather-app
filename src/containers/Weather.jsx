@@ -14,7 +14,7 @@ import Weather from '../components/Weather';
 // TODO: isAdding default true if myCities.length === 0
 const withWeatherState = withStateHandlers({
     isAdding: true,
-    unit: 'metric',
+    units: 'metric',
     myCities: [],
     timestamp: Date.now(),
     timestampIntervalID: null,
@@ -26,31 +26,29 @@ const withWeatherState = withStateHandlers({
         isAdding: false,
     }),
 
-    handleChangeUnit: () => unit => ({ unit }),
+    handleChangeUnit: () => units => ({ units }),
 
-    updateTimestamp: () => () => ({ timestamp: Date.now() }),
+    setTimestamp: () => () => ({ timestamp: Date.now() }),
 
-    setTimestampIntervalID: () => timestampIntervalID => ({ timestampIntervalID }),
+    setIntervalID: () => timestampIntervalID => ({ timestampIntervalID }),
 
-    handleSetUnit: () => unit => ({ unit }),
+    handleSetUnit: () => units => ({ units }),
 });
 
-export const weatherContext = {
-    timestamp: number,
-    unit: oneOf(['metric', 'imperial']),
+const withWeatherContext = withContext({
+    units: oneOf(['metric', 'imperial']),
     myCities: arrayOf(number),
-};
-
-const withWeatherContext = withContext(weatherContext, ({ timestamp, unit, myCities }) => ({
-    unit,
+    timestamp: number,
+}, ({ timestamp, units, myCities }) => ({
+    units,
     myCities,
     timestamp,
 }));
 
 const withLifecycle = lifecycle({
     componentDidMount() {
-        const { updateTimestamp, setTimestampIntervalID } = this.props;
-        setTimestampIntervalID(setInterval(updateTimestamp, 60 * 1000));
+        const { setTimestamp, setIntervalID } = this.props;
+        setIntervalID(setInterval(setTimestamp, 60 * 1000));
     },
 
     componentWillUnmount() {

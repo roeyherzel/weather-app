@@ -10,19 +10,19 @@ const StyledButtonGroup = styled(Button.Group)`
     }
 `;
 
-const UnitButtons = ({ unit, handleSetUnit }) => (
+const UnitButtons = ({ units, handleSetUnit }) => (
     <StyledButtonGroup basic size="mini">
-        <Button active={unit === 'metric'} onClick={() => handleSetUnit('metric')}>
+        <Button active={units === 'metric'} onClick={() => handleSetUnit('metric')}>
             C&deg;
         </Button>
-        <Button active={unit === 'imperial'} onClick={() => handleSetUnit('imperial')}>
+        <Button active={units === 'imperial'} onClick={() => handleSetUnit('imperial')}>
             F&deg;
         </Button>
     </StyledButtonGroup>
 );
 
 UnitButtons.propTypes = {
-    unit: oneOf(['metric', 'imperial']).isRequired,
+    units: oneOf(['metric', 'imperial']).isRequired,
     handleSetUnit: func.isRequired,
 };
 

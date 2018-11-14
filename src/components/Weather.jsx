@@ -28,7 +28,7 @@ const ActionRow = styled.div`
 
 
 const Weather = ({
-    unit,
+    units,
     isAdding,
     myCities,
     handleAddCity,
@@ -45,7 +45,7 @@ const Weather = ({
         <Segment attached>
             { !isAdding && (
                 <ActionRow>
-                    <UnitButtons unit={unit} handleSetUnit={handleSetUnit} />
+                    <UnitButtons units={units} handleSetUnit={handleSetUnit} />
 
                     <Button
                         circular
@@ -73,7 +73,7 @@ const Weather = ({
 );
 
 Weather.propTypes = {
-    unit: string.isRequired,
+    units: string.isRequired,
     isAdding: bool.isRequired,
     myCities: array.isRequired,
     handleAddCity: func.isRequired,

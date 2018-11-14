@@ -11,15 +11,15 @@ const Container = styled.span`
     font-size: 1rem;
 `;
 
-const Degree = ({ unit }) => (
+const Degree = ({ units }) => (
     <Container>
         &deg;
-        { unit === 'metric' ? 'C' : 'F' }
+        { units === 'metric' ? 'C' : 'F' }
     </Container>
 );
 
 Degree.propTypes = {
-    unit: unitType.isRequired,
+    units: unitType.isRequired,
 };
 
-export default getContext({ unit: unitType })(Degree);
+export default getContext({ units: unitType })(Degree);

@@ -112,7 +112,7 @@ Current.propTypes = {
             id: number.isRequired,
             description: string.isRequired,
         }),
-    }),
+    }).isRequired,
 };
 
 export default Current;
