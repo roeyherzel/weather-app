@@ -3,12 +3,11 @@ import {
     string, bool, func, array,
 } from 'prop-types';
 import styled from 'styled-components';
-import { Segment, Header, Button } from 'semantic-ui-react';
+import { Segment, Header } from 'semantic-ui-react';
 import media, { sizes as mediaSizes } from '../styleUtils/media';
 
 import AddCity from '../containers/AddCity';
 import ShowCities from './ShowCities';
-import UnitButtons from './UnitButtons';
 
 
 const Page = styled.div`
@@ -21,19 +20,10 @@ const Page = styled.div`
     `};
 `;
 
-const ActionRow = styled.div`
-    display: flex;
-    align-items: center;
-`;
-
 
 const Weather = ({
-    units,
     isAdding,
-    myCities,
-    handleAddCity,
-    handleSetUnit,
-    toggleIsAdding,
+    ...rest
 }) => (
     <Page>
         <Header
@@ -43,31 +33,11 @@ const Weather = ({
             content="WeatherZone"
         />
         <Segment attached>
-            { !isAdding && (
-                <ActionRow>
-                    <UnitButtons units={units} handleSetUnit={handleSetUnit} />
-
-                    <Button
-                        circular
-                        icon="setting"
-                        size="small"
-                    />
-
-                    <Button
-                        circular
-                        icon="add"
-                        size="small"
-                        onClick={toggleIsAdding}
-                    />
-                </ActionRow>
+            { isAdding ? (
+                <AddCity {...rest} />
+            ) : (
+                <ShowCities {...rest} />
             ) }
-
-            <div>
-                { isAdding
-                    ? <AddCity handleAddCity={handleAddCity} toggleIsAdding={toggleIsAdding} />
-                    : <ShowCities cities={myCities} />
-                }
-            </div>
         </Segment>
     </Page>
 );
