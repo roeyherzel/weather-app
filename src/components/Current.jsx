@@ -33,13 +33,13 @@ const LabelsRow = styled.div`
 `;
 
 const Icon = styled(WeatherIcons)`
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin-right: 5px;
 `;
 
 const TempContainer = styled.div`
     display: flex;
-    align-items: center;
+    align-items: flex-start;
 `;
 
 const Temp = styled.span`
