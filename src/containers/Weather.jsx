@@ -2,38 +2,68 @@ import {
     compose,
     lifecycle,
     withContext,
+    withState,
     withStateHandlers,
+    setDisplayName,
 } from 'recompose';
 import { number, oneOf, arrayOf } from 'prop-types';
 
+import withLocalStorage from '../enhancers/withLocalStorage';
 import Weather from '../components/Weather';
 
 
-// TODO: save persist state to localStorage
-// TODO: load default state from localStorage
-// TODO: isAdding default true if myCities.length === 0
-const withWeatherState = withStateHandlers({
-    isAdding: true,
-    units: 'metric',
-    myCities: [],
-    timestamp: Date.now(),
-    timestampIntervalID: null,
-}, {
+// const initialState = {
+//     myCities: [],
+//     units: 'metric',
+// };
+
+// const serialState = JSON.stringify(initialState);
+
+// const loadState = JSON.parse(serialState);
+
+const getStorageProp = (prop) => {
+    const res = new Map(JSON.parse(localStorage.getItem('cache')));
+    console.log(res.get(prop));
+    return res.get(prop);
+};
+
+const withWeatherState = withStateHandlers(() => {
+    const myCities = getStorageProp('myCities') || [];
+    const isAdding = !myCities.length;
+
+    return { myCities, isAdding };
+},
+{
     toggleIsAdding: ({ isAdding }) => () => ({ isAdding: !isAdding }),
 
     handleAddCity: ({ myCities }) => cityID => ({
         myCities: [...myCities, cityID],
         isAdding: false,
     }),
-
-    handleChangeUnit: () => units => ({ units }),
-
-    setTimestamp: () => () => ({ timestamp: Date.now() }),
-
-    setIntervalID: () => timestampIntervalID => ({ timestampIntervalID }),
-
-    handleSetUnit: () => units => ({ units }),
 });
+
+const withTimeTick = compose(
+    setDisplayName('withTimeTick'),
+    withStateHandlers({
+        timestamp: Date.now(),
+        intervalID: null,
+    }, {
+        setTimestamp: () => () => ({ timestamp: Date.now() }),
+        setIntervalID: () => intervalID => ({ intervalID }),
+    }),
+
+    lifecycle({
+        componentDidMount() {
+            const { setTimestamp, setIntervalID } = this.props;
+            setIntervalID(setInterval(setTimestamp, 60 * 1000));
+        },
+        componentWillUnmount() {
+            clearInterval(this.props.intervalID);
+        },
+    }),
+);
+
+const withUnitsState = withState('units', 'handleSetUnit', getStorageProp('units') || 'metric');
 
 const withWeatherContext = withContext({
     units: oneOf(['metric', 'imperial']),
@@ -45,18 +75,10 @@ const withWeatherContext = withContext({
     timestamp,
 }));
 
-const withLifecycle = lifecycle({
-    componentDidMount() {
-        const { setTimestamp, setIntervalID } = this.props;
-        setIntervalID(setInterval(setTimestamp, 60 * 1000));
-    },
-
-    componentWillUnmount() {
-        clearInterval(this.props.timestampIntervalID);
-    },
-});
 export default compose(
     withWeatherState,
+    withUnitsState,
+    withTimeTick,
     withWeatherContext,
-    withLifecycle,
+    withLocalStorage('myCities', 'units'),
 )(Weather);
