@@ -17,7 +17,7 @@ export async function search({ q, units }) {
                 ...baseParams,
                 q,
                 units,
-                type: 'accurate',
+                type: 'like',
             },
         });
 

@@ -2,14 +2,10 @@ import moment from 'moment-timezone';
 import tzlookup from 'tz-lookup';
 
 
-const transformIcon = ({ id, icon }) => {
-    if (icon.endsWith('n')) {
-        return `night-${id}`;
-    }
-    if (icon.endsWith('d')) {
-        return `day-${id}`;
-    }
-    return id;
+const getIconPeriod = (icon) => {
+    if (icon.endsWith('n')) return 'night';
+    if (icon.endsWith('d')) return 'day';
+    return null;
 };
 
 export const transformCurrentWeather = ({
@@ -42,8 +38,8 @@ export const transformCurrentWeather = ({
         temp: Math.round(temp),
         tz,
         dt: moment.tz(tz),
-        last_update: moment.unix(dt).tz(tz), // timestamp
-        icon: transformIcon({ id, icon }),
+        lastUpdate: moment.unix(dt).tz(tz), // timestamp
+        icon: { id, period: getIconPeriod(icon) },
     });
 };
 

@@ -4,6 +4,7 @@ import {
     instanceOf,
     string,
     number,
+    oneOf,
 } from 'prop-types';
 import moment from 'moment';
 import styled from 'styled-components';
@@ -33,8 +34,11 @@ const LabelsRow = styled.div`
 `;
 
 const Icon = styled(WeatherIcons)`
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-right: 5px;
+    color: ${p => (p.period === 'night'
+        ? p.theme.color.black
+        : p.theme.color.yellow)};
 `;
 
 const TempContainer = styled.div`
@@ -50,7 +54,6 @@ const Temp = styled.span`
 const Location = styled.h2`
     font-size: 21px;
     font-weight: 300;
-    color: ${p => p.theme.color.grey};
     margin-bottom: 5px;
 `;
 
@@ -85,7 +88,7 @@ const Current = ({
             </div>
 
             <TempContainer>
-                <Icon name={icon} />
+                <Icon {...icon} />
                 <Temp>{ temp }</Temp>
                 <Degree />
             </TempContainer>
@@ -108,10 +111,12 @@ Current.propTypes = {
         dt: instanceOf(moment).isRequired,
         city: string.isRequired,
         country: string.isRequired,
-        weather: shape({
+        icon: shape({
             id: number.isRequired,
-            description: string.isRequired,
+            period: oneOf(['day', 'night', null]),
         }),
+        main: string.isRequired,
+        temp: number.isRequired,
     }).isRequired,
 };
 
