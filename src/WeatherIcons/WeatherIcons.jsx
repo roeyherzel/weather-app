@@ -6,7 +6,7 @@ const Icon = styled.i.attrs({
     className: p => `wi wi-owm-${p.name}`,
 })`
     && {
-        line-height: 1.5;
+        line-height: 1;
     }
 `;
 
