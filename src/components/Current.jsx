@@ -8,7 +8,9 @@ import {
 } from 'prop-types';
 import moment from 'moment';
 import styled from 'styled-components';
-import { Segment, Header, Label } from 'semantic-ui-react';
+import {
+    Segment, Header, Label, Icon,
+} from 'semantic-ui-react';
 
 import WeatherIcons from '../WeatherIcons';
 import Degree from './Degree';
@@ -30,24 +32,27 @@ const Row = styled.div`
 const LabelsRow = styled.div`
     display: flex;
     flex-direction: row-reverse;
-    margin-top: 5px;
+    margin-top: 4px;
 `;
 
-const Icon = styled(WeatherIcons)`
-    font-size: 2.5rem;
-    margin-right: 5px;
-    color: ${p => (p.period === 'night'
-        ? p.theme.color.black
-        : p.theme.color.yellow)};
+const StyledLabel = styled(Label)`
+    flex: 1;
+    max-width: 120px;
+    text-align: center;
+`;
+
+const StyledWeatherIcon = styled(WeatherIcons)`
+    font-size: 2.1rem;
+    margin-right: 4px;
 `;
 
 const TempContainer = styled.div`
     display: flex;
-    align-items: flex-start;
+    align-items: center;
 `;
 
 const Temp = styled.span`
-    font-size: 4rem;
+    font-size: 3.5rem;
     line-height: 0.8;
 `;
 
@@ -57,11 +62,12 @@ const Location = styled.h2`
     margin-bottom: 5px;
 `;
 
-const Condition = styled(Header)`
-    && {
-        margin-top: 0;
-        margin-bottom: 2px;
-    }
+const Condition = styled.h3`
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: rgba(0,0,0,.87);
+    margin: 0;
 `;
 
 const Current = ({
@@ -82,26 +88,24 @@ const Current = ({
                     ,&nbsp;
                     { country }
                 </Location>
-                <Condition sub color="grey">
+                <Condition>
                     { main }
                 </Condition>
             </div>
 
             <TempContainer>
-                <Icon {...icon} />
+                <StyledWeatherIcon {...icon} />
                 <Temp>{ temp }</Temp>
                 <Degree />
             </TempContainer>
         </Row>
 
         <LabelsRow>
-            <Label
-                basic
-                size="small"
-                icon="clock"
-                content={dt.format('HH:mm')}
-                detail={dt.format('z')}
-            />
+            <StyledLabel basic>
+                <Icon name="clock" color={icon.period === 'day' ? 'orange' : 'black'} />
+                { dt.format('HH:mm') }
+                <Label.Detail>{ dt.format('z') }</Label.Detail>
+            </StyledLabel>
         </LabelsRow>
     </StyledSegment>
 );
