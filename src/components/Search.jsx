@@ -24,45 +24,59 @@ const Message = styled.div`
     `}
 `;
 
+class Search extends React.Component {
+    constructor(props) {
+        super(props);
+        this.inputRef = React.createRef();
+    }
 
-const Search = ({
-    error,
-    message,
-    isLoading,
-    handleInputChange,
-    handleSearch,
-    toggleIsAdding,
-}) => (
-    <Container>
-        <InputContainer>
-            <Input
-                fluid
-                size="small"
-                placeholder="Example: Portland / London, GB"
-                icon={{
-                    name: 'search',
-                    circular: true,
-                    link: true,
-                    onClick: handleSearch,
-                }}
-                error={error}
-                loading={isLoading}
-                onKeyPress={handleSearch}
-                onChange={handleInputChange}
-            />
-            { message
-                && <Message error={error}>{ message }</Message>
-            }
-        </InputContainer>
+    componentDidMount() {
+        this.inputRef.current.focus();
+    }
 
-        { /* TODO: hide cancel if myCities is empty */ }
-        <Button
-            size="small"
-            icon="cancel"
-            onClick={toggleIsAdding}
-        />
-    </Container>
-);
+    render() {
+        const {
+            error,
+            message,
+            isLoading,
+            handleInputChange,
+            handleSearch,
+            toggleIsAdding,
+        } = this.props;
+
+        return (
+            <Container>
+                <InputContainer>
+                    <Input
+                        fluid
+                        ref={this.inputRef}
+                        size="small"
+                        placeholder="Example: Portland / London, GB"
+                        icon={{
+                            name: 'search',
+                            circular: true,
+                            link: true,
+                            onClick: handleSearch,
+                        }}
+                        error={error}
+                        loading={isLoading}
+                        onKeyPress={handleSearch}
+                        onChange={handleInputChange}
+                    />
+                    { message
+                        && <Message error={error}>{ message }</Message>
+                    }
+                </InputContainer>
+
+                <Button
+                    size="small"
+                    icon="cancel"
+                    onClick={toggleIsAdding}
+                />
+            </Container>
+        );
+    }
+}
 
 Search.propTypes = {
     message: string,
