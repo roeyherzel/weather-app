@@ -48,6 +48,7 @@ const TempContainer = styled.div`
     display: flex;
     align-items: center;
     margin-right: 2px;
+    line-height: 0.8;
 `;
 
 const Temp = styled.span`

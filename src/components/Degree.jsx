@@ -9,6 +9,7 @@ const unitType = oneOf(['metric', 'imperial']);
 const Container = styled.span`
     align-self: flex-start;
     font-size: 1rem;
+    margin-left: 2px;
 `;
 
 const Degree = ({ units }) => (
