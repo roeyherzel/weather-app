@@ -9,7 +9,7 @@ import {
 import moment from 'moment';
 import styled from 'styled-components';
 import {
-    Segment, Header, Label, Icon,
+    Segment, Label, Icon,
 } from 'semantic-ui-react';
 
 import WeatherIcons from '../WeatherIcons';
@@ -36,8 +36,6 @@ const LabelsRow = styled.div`
 `;
 
 const StyledLabel = styled(Label)`
-    flex: 1;
-    max-width: 120px;
     text-align: center;
 `;
 
@@ -49,6 +47,7 @@ const StyledWeatherIcon = styled(WeatherIcons)`
 const TempContainer = styled.div`
     display: flex;
     align-items: center;
+    margin-right: 2px;
 `;
 
 const Temp = styled.span`
