@@ -4,49 +4,37 @@ import { Button } from 'semantic-ui-react';
 
 import Spinner from './Spinner';
 import Current from '../containers/Current';
-import UnitButtons from './UnitButtons';
-
-
-const ActionRow = styled.div`
-    display: flex;
-    align-items: center;
-`;
-
-const List = styled.div`
-    margin-top: 1.5rem;
-`;
+import ActionBar from './ActionBar';
+import { List, Item } from './common';
 
 
 const ShowCities = ({
     isLoading,
+    isEditing,
     units,
     cities,
-    handleSetUnits,
-    toggleIsAdding,
+    ...rest
 }) => (
     <div>
-        <ActionRow>
-            <UnitButtons units={units} handleSetUnits={handleSetUnits} />
-
-            <Button
-                circular
-                icon="setting"
-                size="small"
-            />
-
-            <Button
-                circular
-                icon="add"
-                size="small"
-                onClick={toggleIsAdding}
-            />
-        </ActionRow>
+        <ActionBar {...rest} isEditing={isEditing} />
 
         { isLoading
             ? <Spinner />
             : (
                 <List>
-                    { cities.map(({ cityID, ...data }) => <Current key={cityID} data={data} />) }
+                    { cities.map(({ cityID, ...data }) => (
+                        <Item key={cityID}>
+                            { isEditing
+                                && (
+                                    <Button
+                                        compact
+                                        icon="trash"
+                                    />
+                                )
+                            }
+                            <Current key={cityID} data={data} />
+                        </Item>
+                    )) }
                 </List>
             )
         }

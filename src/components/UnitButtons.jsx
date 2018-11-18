@@ -1,6 +1,7 @@
 import React from 'react';
 import { oneOf, func } from 'prop-types';
 import styled from 'styled-components';
+import { getContext } from 'recompose';
 import { Button } from 'semantic-ui-react';
 
 
@@ -26,4 +27,7 @@ UnitButtons.propTypes = {
     handleSetUnits: func.isRequired,
 };
 
-export default UnitButtons;
+export default getContext({
+    units: oneOf(['metric', 'imperial']),
+    handleSetUnits: func,
+})(UnitButtons);

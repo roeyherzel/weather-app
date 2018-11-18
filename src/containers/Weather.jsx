@@ -3,7 +3,9 @@ import {
     withContext,
     withStateHandlers,
 } from 'recompose';
-import { number, oneOf, arrayOf } from 'prop-types';
+import {
+    number, oneOf, arrayOf, func,
+} from 'prop-types';
 
 import withLocalStorage, { getStorage } from '../enhancers/withLocalStorage';
 import withTimeTick from '../enhancers/withTimeTick';
@@ -15,11 +17,16 @@ const withAppState = withStateHandlers(() => {
     const storage = getStorage();
     const units = storage.get('units') || 'metric';
     const myCities = storage.get('myCities') || [];
-    const isAdding = !myCities.length;
 
-    return { units, myCities, isAdding };
+    return {
+        units,
+        myCities,
+        isAdding: !myCities.length,
+        isEditing: false,
+    };
 },
 {
+    toggleIsEditing: ({ isEditing }) => () => ({ isEditing: !isEditing }),
     toggleIsAdding: ({ isAdding }) => () => ({ isAdding: !isAdding }),
 
     handleAddCity: ({ myCities }) => cityID => ({
@@ -32,12 +39,13 @@ const withAppState = withStateHandlers(() => {
 
 const withAppContext = withContext({
     units: oneOf(['metric', 'imperial']),
+    handleSetUnits: func,
     myCities: arrayOf(number),
     timestamp: number,
-}, ({ timestamp, units, myCities }) => ({
-    units,
-    myCities,
-    timestamp,
+}, ({
+    timestamp, units, handleSetUnits, myCities,
+}) => ({
+    timestamp, units, handleSetUnits, myCities,
 }));
 
 export default compose(

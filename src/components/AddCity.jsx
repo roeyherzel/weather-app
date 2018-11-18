@@ -2,25 +2,12 @@ import React from 'react';
 import {
     func, arrayOf, shape, number,
 } from 'prop-types';
-import styled from 'styled-components';
 
 import { Button } from 'semantic-ui-react';
 
 import Search from './Search';
 import Current from './Current';
-
-
-const List = styled.ul`
-    margin-top: 1rem;
-    list-style: none;
-    padding: 0;
-`;
-
-const Item = styled.li`
-    display: flex;
-    align-items: stretch;
-    margin-bottom: 1rem;
-`;
+import { List, Item } from './common';
 
 
 const AddCity = ({

@@ -35,10 +35,6 @@ const LabelsRow = styled.div`
     margin-top: 4px;
 `;
 
-const StyledLabel = styled(Label)`
-    text-align: center;
-`;
-
 const StyledWeatherIcon = styled(WeatherIcons)`
     font-size: 2.1rem;
     margin-right: 4px;
@@ -57,7 +53,7 @@ const Temp = styled.span`
 `;
 
 const Location = styled.h2`
-    font-size: 21px;
+    font-size: 19px;
     font-weight: 300;
     margin-bottom: 5px;
 `;
@@ -101,11 +97,11 @@ const Current = ({
         </Row>
 
         <LabelsRow>
-            <StyledLabel basic>
+            <Label basic size="small">
                 <Icon name="clock" color={icon.period === 'day' ? 'orange' : 'black'} />
                 { dt.format('HH:mm') }
                 <Label.Detail>{ dt.format('z') }</Label.Detail>
-            </StyledLabel>
+            </Label>
         </LabelsRow>
     </StyledSegment>
 );
