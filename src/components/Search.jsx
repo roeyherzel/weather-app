@@ -42,6 +42,7 @@ class Search extends React.Component {
             handleInputChange,
             handleSearch,
             toggleIsAdding,
+            showCancelBtn = true,
         } = this.props;
 
         return (
@@ -68,11 +69,15 @@ class Search extends React.Component {
                     }
                 </InputContainer>
 
-                <Button
-                    size="small"
-                    icon="cancel"
-                    onClick={toggleIsAdding}
-                />
+                { showCancelBtn
+                    && (
+                        <Button
+                            size="small"
+                            icon="cancel"
+                            onClick={toggleIsAdding}
+                        />
+                    )
+                }
             </Container>
         );
     }

@@ -13,10 +13,11 @@ import { List, Item } from './common';
 const AddCity = ({
     results,
     handleAddCity,
+    myCities,
     ...rest
 }) => (
     <div>
-        <Search {...rest} />
+        <Search {...rest} showCancelBtn={!!myCities.length} />
 
         { results && (
             <List>
