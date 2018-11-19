@@ -71,6 +71,10 @@ const withAppContext = withContext({
 }));
 
 // FIXME: hack to tie myCitiesData to myCities. makes city unmount on removeCity
+// TODO: change myCities to Map id => data
+// TODO: on intial state, clear data
+// TODO: Cities on componentDidMount check if need to fetch
+// TODO: handleAdddCity(id, data);
 const withMappedProps = mapProps(({ myCities, myCitiesData, ...props }) => ({
     ...props,
     myCities,
