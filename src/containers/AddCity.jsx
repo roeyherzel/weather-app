@@ -24,15 +24,27 @@ const withSearchState = withStateHandlers({
         error: false,
     }),
 
-    clearResults: () => () => ({ results: null }),
+    clearResults: () => () => ({
+        results: null,
+    }),
 
-    setIsLoading: () => isLoading => ({ isLoading }),
+    setIsLoading: () => isLoading => ({
+        isLoading,
+    }),
 
-    setMessage: () => message => ({ message, error: true }),
+    setMessage: () => message => ({
+        message,
+        error: true,
+    }),
 
-    clearMessgae: () => () => ({ message: null, error: false }),
+    clearMessgae: () => () => ({
+        message: null,
+        error: false,
+    }),
 
-    handleInputChange: () => (e, { value }) => ({ inputValue: value }),
+    handleInputChange: () => (e, { value }) => ({
+        inputValue: value,
+    }),
 });
 
 const withSearchHandler = withHandlers({
@@ -64,6 +76,7 @@ const withSearchHandler = withHandlers({
             const results = await api.search({ q: inputValue, units });
             setResults(results);
             setIsLoading(false);
+
         } catch (error) {
             setMessage(transformError(error));
             setIsLoading(false);

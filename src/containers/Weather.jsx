@@ -2,6 +2,7 @@ import {
     compose,
     withContext,
     withStateHandlers,
+    mapProps,
 } from 'recompose';
 import {
     number, oneOf, arrayOf, func,
@@ -21,21 +22,41 @@ const withAppState = withStateHandlers(() => {
     return {
         units,
         myCities,
+        myCitiesData: new Map(),
         isAdding: !myCities.length,
         isEditing: false,
     };
 },
 {
-    toggleIsEditing: ({ isEditing }) => () => ({ isEditing: !isEditing }),
+    toggleIsAdding: ({ isAdding }) => () => ({
+        isAdding: !isAdding,
+    }),
 
-    toggleIsAdding: ({ isAdding }) => () => ({ isAdding: !isAdding }),
+    toggleIsEditing: ({ isEditing }) => () => ({
+        isEditing: !isEditing,
+    }),
 
     handleAddCity: ({ myCities }) => cityID => ({
         myCities: [...myCities, cityID],
         isAdding: false,
     }),
 
-    handleChangeUnits: () => units => ({ units }),
+    handleRemoveCity: ({ myCities }) => (cityID) => {
+        const filtered = myCities.filter(id => id !== cityID);
+        return ({
+            myCities: filtered,
+            isAdding: !filtered.length,
+            isEditing: !!filtered.length,
+        });
+    },
+
+    handleChangeUnits: () => units => ({
+        units,
+    }),
+
+    setCitiesData: () => data => ({
+        myCitiesData: new Map(data.map(d => [d.cityID, d])),
+    }),
 });
 
 const withAppContext = withContext({
@@ -49,9 +70,17 @@ const withAppContext = withContext({
     timestamp, units, handleChangeUnits, myCities,
 }));
 
+// FIXME: hack to tie myCitiesData to myCities. makes city unmount on removeCity
+const withMappedProps = mapProps(({ myCities, myCitiesData, ...props }) => ({
+    ...props,
+    myCities,
+    myCitiesData: myCities.map(id => myCitiesData.get(id)),
+}));
+
 export default compose(
     withAppState,
     withTimeTick,
     withAppContext,
     withLocalStorage('myCities', 'units'),
+    withMappedProps,
 )(Weather);

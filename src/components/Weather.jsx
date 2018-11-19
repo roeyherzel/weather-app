@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-    string, bool, func, array,
-} from 'prop-types';
+import { bool } from 'prop-types';
 import styled from 'styled-components';
 import { Segment, Header } from 'semantic-ui-react';
 import media, { sizes as mediaSizes } from '../styleUtils/media';
@@ -42,12 +40,7 @@ const Weather = ({
 );
 
 Weather.propTypes = {
-    units: string.isRequired,
     isAdding: bool.isRequired,
-    myCities: array.isRequired,
-    handleAddCity: func.isRequired,
-    handleChangeUnits: func.isRequired,
-    toggleIsAdding: func.isRequired,
 };
 
 export default Weather;

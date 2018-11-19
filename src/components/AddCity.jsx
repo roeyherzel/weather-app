@@ -20,12 +20,12 @@ const AddCity = ({
 
         { results && (
             <List>
-                { results.map(data => (
-                    <Item key={data.cityID}>
+                { results.map(({ cityID, ...data }) => (
+                    <Item key={cityID}>
                         <Button
                             compact
                             icon="add"
-                            onClick={() => handleAddCity(data.cityID)}
+                            onClick={() => handleAddCity(cityID)}
                         />
                         <Current data={data} />
                     </Item>

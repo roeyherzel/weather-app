@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    arrayOf, shape, number, bool,
+    arrayOf, shape, number, bool, func,
 } from 'prop-types';
 
 import { Button } from 'semantic-ui-react';
@@ -11,26 +11,27 @@ import { List, Item } from './common';
 
 
 const Cities = ({
-    cities = [],
+    myCitiesData = [],
     isEditing,
+    handleRemoveCity,
     ...rest
 }) => (
     <div>
         <ActionBar {...rest} isEditing={isEditing} />
 
         <List>
-            { cities.map(({ cityID, ...data }) => (
+            { myCitiesData.map(({ cityID, ...data }) => (
                 <Item key={cityID}>
                     { isEditing
                         && (
                             <Button
                                 compact
                                 icon="trash"
-                                // onClick={() => handleRemoveCity(data.cityID)}
+                                onClick={() => handleRemoveCity(cityID)}
                             />
                         )
                     }
-                    <Current key={cityID} data={data} />
+                    <Current data={data} />
                 </Item>
             )) }
         </List>
@@ -42,6 +43,7 @@ Cities.propTypes = {
     cities: arrayOf(shape({
         cityID: number.isRequired,
     }).isRequired),
+    handleRemoveCity: func.isRequired,
 };
 
 export default Cities;

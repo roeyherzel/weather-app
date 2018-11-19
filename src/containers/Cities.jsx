@@ -16,21 +16,19 @@ import Spinner from '../components/Spinner';
 
 const withLoadingState = withState('isLoading', 'setLoading', true);
 
-const withCitiesState = withState('cities', 'setCities', null);
-
 const withFetchHandler = withHandlers({
     handleFetch: ({
-        setLoading,
-        setCities,
-        myCities,
         units,
+        myCities,
+        setLoading,
+        setCitiesData,
     }) => async () => {
 
         setLoading(true);
 
         try {
             const data = await api.getGroup({ id: myCities.join(','), units });
-            setCities(data);
+            setCitiesData(data);
             setLoading(false);
 
         } catch (error) {
@@ -63,7 +61,6 @@ export default compose(
         units: oneOf(['metric', 'imperial']).isRequired,
     }),
     withLoadingState,
-    withCitiesState,
     withFetchHandler,
     withLifecycle,
     withLoadingSpinner,
