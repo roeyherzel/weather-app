@@ -7,7 +7,7 @@ import { Segment, Header } from 'semantic-ui-react';
 import media, { sizes as mediaSizes } from '../styleUtils/media';
 
 import AddCity from '../containers/AddCity';
-import ShowCities from '../containers/ShowCities';
+import Cities from '../containers/Cities';
 
 
 const Page = styled.div`
@@ -33,11 +33,10 @@ const Weather = ({
             content="WeatherZone"
         />
         <Segment attached>
-            { isAdding ? (
-                <AddCity {...rest} />
-            ) : (
-                <ShowCities {...rest} />
-            ) }
+            { isAdding
+                ? <AddCity {...rest} />
+                : <Cities {...rest} />
+            }
         </Segment>
     </Page>
 );
@@ -47,7 +46,7 @@ Weather.propTypes = {
     isAdding: bool.isRequired,
     myCities: array.isRequired,
     handleAddCity: func.isRequired,
-    handleSetUnits: func.isRequired,
+    handleChangeUnits: func.isRequired,
     toggleIsAdding: func.isRequired,
 };
 

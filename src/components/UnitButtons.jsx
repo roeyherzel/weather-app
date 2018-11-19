@@ -11,12 +11,12 @@ const StyledButtonGroup = styled(Button.Group)`
     }
 `;
 
-const UnitButtons = ({ units, handleSetUnits }) => (
+const UnitButtons = ({ units, handleChangeUnits }) => (
     <StyledButtonGroup basic size="mini">
-        <Button active={units === 'metric'} onClick={() => handleSetUnits('metric')}>
+        <Button active={units === 'metric'} onClick={() => handleChangeUnits('metric')}>
             C&deg;
         </Button>
-        <Button active={units === 'imperial'} onClick={() => handleSetUnits('imperial')}>
+        <Button active={units === 'imperial'} onClick={() => handleChangeUnits('imperial')}>
             F&deg;
         </Button>
     </StyledButtonGroup>
@@ -24,10 +24,10 @@ const UnitButtons = ({ units, handleSetUnits }) => (
 
 UnitButtons.propTypes = {
     units: oneOf(['metric', 'imperial']).isRequired,
-    handleSetUnits: func.isRequired,
+    handleChangeUnits: func.isRequired,
 };
 
 export default getContext({
     units: oneOf(['metric', 'imperial']),
-    handleSetUnits: func,
+    handleChangeUnits: func,
 })(UnitButtons);

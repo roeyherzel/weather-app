@@ -27,6 +27,7 @@ const withAppState = withStateHandlers(() => {
 },
 {
     toggleIsEditing: ({ isEditing }) => () => ({ isEditing: !isEditing }),
+
     toggleIsAdding: ({ isAdding }) => () => ({ isAdding: !isAdding }),
 
     handleAddCity: ({ myCities }) => cityID => ({
@@ -34,18 +35,18 @@ const withAppState = withStateHandlers(() => {
         isAdding: false,
     }),
 
-    handleSetUnits: () => units => ({ units }),
+    handleChangeUnits: () => units => ({ units }),
 });
 
 const withAppContext = withContext({
     units: oneOf(['metric', 'imperial']),
-    handleSetUnits: func,
+    handleChangeUnits: func,
     myCities: arrayOf(number),
     timestamp: number,
 }, ({
-    timestamp, units, handleSetUnits, myCities,
+    timestamp, units, handleChangeUnits, myCities,
 }) => ({
-    timestamp, units, handleSetUnits, myCities,
+    timestamp, units, handleChangeUnits, myCities,
 }));
 
 export default compose(
