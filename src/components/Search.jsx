@@ -72,6 +72,7 @@ class Search extends React.Component {
                 { showCancelBtn
                     && (
                         <Button
+                            basic
                             size="small"
                             icon="cancel"
                             onClick={toggleIsAdding}

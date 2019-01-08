@@ -39,7 +39,10 @@ export const transformCurrentWeather = ({
         tz,
         dt: moment.tz(tz),
         lastUpdate: moment.unix(dt).tz(tz), // timestamp
-        icon: { id, period: getIconPeriod(icon) },
+        icon: {
+            id,
+            period: getIconPeriod(icon),
+        },
     });
 };
 

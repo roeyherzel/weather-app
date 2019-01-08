@@ -43,16 +43,19 @@ const Temp = styled.span`
 
 const Title = styled.h2`
     font-size: 20px;
-    margin-bottom: 8px;
+    margin-bottom: 2px;
 `;
 
 const SubTitle = styled.div`
     font-weight: 400;
     color: ${p => p.theme.color.grey};
+    text-transform: capitalize;
+
 `;
 
-const Description = styled.span`
-    text-transform: capitalize;
+const Time = styled.div`
+    font-weight: 400;
+    color: ${p => p.theme.color.grey};
 `;
 
 const CardHeader = ({
@@ -71,8 +74,11 @@ const CardHeader = ({
                 { city },&nbsp;{ country }
             </Title>
             <SubTitle>
-                { dt.format('ddd H:mm a') } | <Description>{ description }</Description>
+                { description }
             </SubTitle>
+            <Time>
+                { dt.format('dddd h:mm a') }
+            </Time>
         </div>
 
         <TempContainer>

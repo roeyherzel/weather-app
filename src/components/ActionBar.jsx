@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { bool, func } from 'prop-types';
 import styled from 'styled-components';
 import { Button } from 'semantic-ui-react';
@@ -11,48 +11,42 @@ const Container = styled.div`
     align-items: center;
 `;
 
-const BackBtn = styled(Button)`
-    && {
-        margin-left: auto;
-    }
-`;
+const ActionBtn = styled(Button).attrs({
+    basic: true,
+    circular: true,
+    size: 'small',
+})``;
 
 const ActionBar = ({
     isEditing,
     toggleIsAdding,
     toggleIsEditing,
-}) => (isEditing ? (
+}) => (
     <Container>
-        <BackBtn
-            basic
-            positive
-            circular
-            icon="check"
-            size="small"
-            onClick={toggleIsEditing}
-        />
-    </Container>
-) : (
-    <Container>
-        <UnitButtons />
+        {
+            isEditing ? (
+                <ActionBtn
+                    icon="reply"
+                    onClick={toggleIsEditing}
+                />
+            ) : (
+                <Fragment>
+                    <ActionBtn
+                        icon="setting"
+                        onClick={toggleIsEditing}
+                    />
 
-        <Button
-            basic
-            circular
-            icon="setting"
-            size="small"
-            onClick={toggleIsEditing}
-        />
+                    <ActionBtn
+                        icon="add"
+                        onClick={toggleIsAdding}
+                    />
 
-        <Button
-            basic
-            circular
-            icon="add"
-            size="small"
-            onClick={toggleIsAdding}
-        />
+                    <UnitButtons />
+                </Fragment>
+            )
+        }
     </Container>
-));
+);
 
 ActionBar.propTypes = {
     isEditing: bool.isRequired,
