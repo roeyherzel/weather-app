@@ -58,7 +58,7 @@ const Description = styled.span`
     text-transform: capitalize;
 `;
 
-const Current = ({
+const CardHeader = ({
     data: {
         dt,
         icon,
@@ -88,7 +88,7 @@ const Current = ({
     </StyledSegment>
 );
 
-Current.propTypes = {
+CardHeader.propTypes = {
     data: shape({
         dt: instanceOf(moment).isRequired,
         city: string.isRequired,
@@ -102,4 +102,4 @@ Current.propTypes = {
     }).isRequired,
 };
 
-export default Current;
+export default CardHeader;

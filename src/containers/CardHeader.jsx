@@ -7,7 +7,7 @@ import {
 import { number, shape, string } from 'prop-types';
 import moment from 'moment-timezone';
 
-import Current from '../components/Current';
+import CardHeader from '../components/CardHeader';
 
 
 export default compose(
@@ -28,4 +28,4 @@ export default compose(
             dt: moment(timestamp).tz(tz),
         },
     })),
-)(Current);
+)(CardHeader);
