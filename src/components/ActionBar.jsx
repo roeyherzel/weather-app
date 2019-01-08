@@ -37,6 +37,7 @@ const ActionBar = ({
         <UnitButtons />
 
         <Button
+            basic
             circular
             icon="setting"
             size="small"
@@ -44,6 +45,7 @@ const ActionBar = ({
         />
 
         <Button
+            basic
             circular
             icon="add"
             size="small"
