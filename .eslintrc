@@ -48,6 +48,7 @@
         "jsx-a11y/anchor-is-valid": [ "warn", { "components": [ "a" ] }],
         "jsx-a11y/label-has-for": [ "error", { "required": { "some": [ "nesting", "id" ] }}],
 
+        "react/jsx-one-expression-per-line": "off",
         "react/jsx-curly-spacing": ["error", { "when": "never", "children": { "when": "always" } }],
         "react/jsx-indent": ["error", 4],
         "react/jsx-indent-props": ["error", 4],
