@@ -28,7 +28,7 @@ const Weather = ({
             inverted
             attached="top"
             textAlign="center"
-            content="WeatherZone"
+            content="WeatherZ"
         />
         <Segment attached>
             { isAdding

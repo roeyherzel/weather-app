@@ -16,15 +16,12 @@ import Degree from './Degree';
 
 const StyledSegment = styled(Segment)`
     && {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
         width: 100%;
         margin-top: 0;
     }
-`;
-
-const Row = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
 `;
 
 const StyledWeatherIcon = styled(WeatherIcons)`
@@ -46,7 +43,7 @@ const Temp = styled.span`
 
 const Title = styled.h2`
     font-size: 20px;
-    margin-bottom: 2px;
+    margin-bottom: 8px;
 `;
 
 const SubTitle = styled.div`
@@ -69,22 +66,20 @@ const CardHeader = ({
     },
 }) => (
     <StyledSegment>
-        <Row>
-            <div>
-                <Title>
-                    { city },&nbsp;{ country }
-                </Title>
-                <SubTitle>
-                    { dt.format('ddd H:mm a') } | <Description>{ description }</Description>
-                </SubTitle>
-            </div>
+        <div>
+            <Title>
+                { city },&nbsp;{ country }
+            </Title>
+            <SubTitle>
+                { dt.format('ddd H:mm a') } | <Description>{ description }</Description>
+            </SubTitle>
+        </div>
 
-            <TempContainer>
-                <StyledWeatherIcon {...icon} />
-                <Temp>{ temp }</Temp>
-                <Degree />
-            </TempContainer>
-        </Row>
+        <TempContainer>
+            <StyledWeatherIcon {...icon} />
+            <Temp>{ temp }</Temp>
+            <Degree />
+        </TempContainer>
     </StyledSegment>
 );
 
