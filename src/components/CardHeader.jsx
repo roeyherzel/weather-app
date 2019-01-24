@@ -8,7 +8,8 @@ import {
 } from 'prop-types';
 import moment from 'moment';
 import styled from 'styled-components';
-import { Segment } from 'semantic-ui-react';
+import { lighten } from 'polished';
+import { Segment, Label, Header } from 'semantic-ui-react';
 
 import WeatherIcons from '../WeatherIcons';
 import Degree from './Degree';
@@ -18,7 +19,7 @@ const StyledSegment = styled(Segment)`
     && {
         display: flex;
         justify-content: space-between;
-        align-items: flex-start;
+        align-items: baseline;
         width: 100%;
         margin-top: 0;
     }
@@ -26,36 +27,38 @@ const StyledSegment = styled(Segment)`
 
 const StyledWeatherIcon = styled(WeatherIcons)`
     font-size: 2rem;
-    margin-right: 4px;
+    margin-top: 2px;
 `;
 
 const TempContainer = styled.div`
     display: flex;
-    align-items: center;
+    justify-content: flex-end;
     margin-right: 2px;
-    line-height: 0.8;
 `;
 
 const Temp = styled.span`
     font-size: 3.5rem;
-    line-height: 0.8;
+    font-weight: 100;
+    line-height: 1;
+    letter-spacing: -4px;
+    margin: 0 4px;
 `;
 
-const Title = styled.h2`
-    font-size: 20px;
-    margin-bottom: 2px;
-`;
-
-const SubTitle = styled.div`
-    font-weight: 400;
-    color: ${p => p.theme.color.grey};
+const Description = styled.span`
     text-transform: capitalize;
-
 `;
 
-const Time = styled.div`
-    font-weight: 400;
-    color: ${p => p.theme.color.grey};
+const Time = styled(Label)`
+    && {
+        text-transform: uppercase;
+        margin-top: 2px;
+    }
+`;
+
+const RightCol = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 `;
 
 const CardHeader = ({
@@ -70,22 +73,22 @@ const CardHeader = ({
 }) => (
     <StyledSegment>
         <div>
-            <Title>
+            <Header>
                 { city },&nbsp;{ country }
-            </Title>
-            <SubTitle>
-                { description }
-            </SubTitle>
-            <Time>
-                { dt.format('dddd h:mm a') }
-            </Time>
+                <Header.Subheader>
+                    <Description>{ description }</Description>
+                </Header.Subheader>
+            </Header>
         </div>
 
-        <TempContainer>
-            <StyledWeatherIcon {...icon} />
-            <Temp>{ temp }</Temp>
-            <Degree />
-        </TempContainer>
+        <RightCol>
+            <TempContainer>
+                <StyledWeatherIcon {...icon} />
+                <Temp>{ temp }</Temp>
+                <Degree />
+            </TempContainer>
+            <Time color="black" size="small">{ dt.format('ddd | h:mm a') }</Time>
+        </RightCol>
     </StyledSegment>
 );
 
