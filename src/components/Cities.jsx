@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {
     arrayOf, shape, number, bool, func,
 } from 'prop-types';
@@ -16,7 +16,7 @@ const Cities = ({
     handleRemoveCity,
     ...rest
 }) => (
-    <div>
+    <Fragment>
         <ActionBar {...rest} isEditing={isEditing} />
 
         <List>
@@ -35,7 +35,7 @@ const Cities = ({
                 </Item>
             )) }
         </List>
-    </div>
+    </Fragment>
 );
 
 Cities.propTypes = {

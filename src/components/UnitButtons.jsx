@@ -7,7 +7,7 @@ import { Button } from 'semantic-ui-react';
 
 const StyledButtonGroup = styled(Button.Group)`
     && {
-        margin-left: auto;
+        margin-right: auto;
     }
 `;
 

@@ -4,6 +4,7 @@ import {
     withStateHandlers,
     withHandlers,
     getContext,
+    mapProps,
 } from 'recompose';
 import api from '../api';
 import { transformError } from '../api/transform';
@@ -20,8 +21,6 @@ const withSearchState = withStateHandlers({
 }, {
     setResults: () => results => ({
         results,
-        message: !results.length ? 'No results found' : null,
-        error: false,
     }),
 
     clearResults: () => () => ({
@@ -32,9 +31,9 @@ const withSearchState = withStateHandlers({
         isLoading,
     }),
 
-    setMessage: () => message => ({
+    setMessage: () => (message, error = false) => ({
         message,
-        error: true,
+        error,
     }),
 
     clearMessgae: () => () => ({
@@ -44,6 +43,8 @@ const withSearchState = withStateHandlers({
 
     handleInputChange: () => (e, { value }) => ({
         inputValue: value,
+        message: null,
+        error: false,
     }),
 });
 
@@ -65,7 +66,7 @@ const withSearchHandler = withHandlers({
         }
 
         if (inputValue.length < 3) {
-            return setMessage('Requires minimum 3 characters');
+            return setMessage('Requires at least 3 characters');
         }
 
         clearResults();
@@ -74,15 +75,28 @@ const withSearchHandler = withHandlers({
 
         try {
             const results = await api.search({ q: inputValue, units });
-            setResults(results);
+
+            if (results.length) {
+                setResults(results);
+            } else {
+                setMessage('Not found');
+            }
             setIsLoading(false);
 
         } catch (error) {
-            setMessage(transformError(error));
+            setMessage(transformError(error), true);
             setIsLoading(false);
         }
     },
 });
+
+const withComponentProps = mapProps(({
+    myCities,
+    ...rest
+}) => ({
+    showCancelBtn: !!myCities.length,
+    ...rest,
+}));
 
 export default compose(
     getContext({
@@ -90,4 +104,5 @@ export default compose(
     }),
     withSearchState,
     withSearchHandler,
+    withComponentProps,
 )(AddCity);

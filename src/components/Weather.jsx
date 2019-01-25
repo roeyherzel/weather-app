@@ -1,7 +1,8 @@
 import React from 'react';
 import { bool } from 'prop-types';
 import styled from 'styled-components';
-import { Segment, Header } from 'semantic-ui-react';
+
+import { Segment } from 'semantic-ui-react';
 import media, { sizes as mediaSizes } from '../styleUtils/media';
 
 import AddCity from '../containers/AddCity';
@@ -18,30 +19,51 @@ const Page = styled.div`
     `};
 `;
 
-const StyledSegment = styled(Segment)`
+
+const Main = styled(Segment)`
     && {
         min-height: 4rem;
     }
 `;
 
+const Title = styled.span`
+    font-family: 'Signika', sans-serif;
+    font-size: 1.5rem;
+    color: white;
+`;
+
 
 const Weather = ({
     isAdding,
+    myCities,
+    handleAddCity,
+    toggleIsAdding,
     ...rest
 }) => (
     <Page>
-        <Header
-            inverted
-            attached="top"
-            textAlign="center"
-            content="WeatherZ"
-        />
-        <StyledSegment attached>
+        <Segment inverted compact attached="top">
+            <Title>WeatherZ</Title>
+        </Segment>
+
+        <Main attached>
+
             { isAdding
-                ? <AddCity {...rest} />
-                : <Cities {...rest} />
+                ? (
+                    <AddCity
+                        myCities={myCities}
+                        handleAddCity={handleAddCity}
+                        toggleIsAdding={toggleIsAdding}
+                    />
+                )
+                : (
+                    <Cities
+                        myCities={myCities}
+                        toggleIsAdding={toggleIsAdding}
+                        {...rest}
+                    />
+                )
             }
-        </StyledSegment>
+        </Main>
     </Page>
 );
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { func, bool, string } from 'prop-types';
 import styled from 'styled-components';
 
-import { Input, Button } from 'semantic-ui-react';
+import { Input, Button, Label } from 'semantic-ui-react';
 
 
 const Container = styled.div`
@@ -25,6 +25,17 @@ const Message = styled.div`
 `;
 
 class Search extends React.Component {
+
+    static propTypes = {
+        message: string,
+        error: bool.isRequired,
+        isLoading: bool.isRequired,
+        handleInputChange: func.isRequired,
+        handleSearch: func.isRequired,
+        toggleIsAdding: func.isRequired,
+        showCancelBtn: bool.isRequired,
+    }
+
     constructor(props) {
         super(props);
         this.inputRef = React.createRef();
@@ -42,7 +53,7 @@ class Search extends React.Component {
             handleInputChange,
             handleSearch,
             toggleIsAdding,
-            showCancelBtn = true,
+            showCancelBtn,
         } = this.props;
 
         return (
@@ -65,14 +76,13 @@ class Search extends React.Component {
                         onChange={handleInputChange}
                     />
                     { message
-                        && <Message error={error}>{ message }</Message>
+                        && <Label pointing color={error ? 'red' : 'yellow'}>{ message }</Label>
                     }
                 </InputContainer>
 
                 { showCancelBtn
                     && (
                         <Button
-                            basic
                             size="small"
                             icon="cancel"
                             onClick={toggleIsAdding}
@@ -83,14 +93,5 @@ class Search extends React.Component {
         );
     }
 }
-
-Search.propTypes = {
-    message: string,
-    error: bool.isRequired,
-    isLoading: bool.isRequired,
-    handleInputChange: func.isRequired,
-    handleSearch: func.isRequired,
-    toggleIsAdding: func.isRequired,
-};
 
 export default Search;

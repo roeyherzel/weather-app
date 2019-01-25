@@ -9,10 +9,10 @@ import UnitButtons from './UnitButtons';
 const Container = styled.div`
     display: flex;
     align-items: center;
+    justify-content: flex-end;
 `;
 
 const ActionBtn = styled(Button).attrs({
-    basic: true,
     circular: true,
     size: 'small',
 })``;
@@ -31,17 +31,17 @@ const ActionBar = ({
                 />
             ) : (
                 <Fragment>
-                    <ActionBtn
-                        icon="setting"
-                        onClick={toggleIsEditing}
-                    />
+                    <UnitButtons />
 
                     <ActionBtn
                         icon="add"
                         onClick={toggleIsAdding}
                     />
 
-                    <UnitButtons />
+                    <ActionBtn
+                        icon="setting"
+                        onClick={toggleIsEditing}
+                    />
                 </Fragment>
             )
         }

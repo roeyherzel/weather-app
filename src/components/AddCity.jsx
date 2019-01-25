@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {
     func, arrayOf, shape, number,
 } from 'prop-types';
@@ -6,18 +6,17 @@ import {
 import { Button } from 'semantic-ui-react';
 
 import Search from './Search';
-import Card from './Card';
+import Card from '../containers/Card';
 import { List, Item } from './common';
 
 
 const AddCity = ({
     results,
     handleAddCity,
-    myCities,
     ...rest
 }) => (
-    <div>
-        <Search {...rest} showCancelBtn={!!myCities.length} />
+    <Fragment>
+        <Search {...rest} />
 
         { results && (
             <List>
@@ -33,7 +32,7 @@ const AddCity = ({
                 )) }
             </List>
         ) }
-    </div>
+    </Fragment>
 );
 
 AddCity.propTypes = {

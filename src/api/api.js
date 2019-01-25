@@ -10,7 +10,7 @@ const baseParams = {
 };
 
 export async function search({ q, units }) {
-    // TODO: replace '-' with space
+    // TODO: city name, replace '-' with space
     try {
         const { data } = await axios.get(`${API}/find`, {
             params: {
