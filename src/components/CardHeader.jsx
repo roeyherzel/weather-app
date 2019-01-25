@@ -8,10 +8,8 @@ import {
 } from 'prop-types';
 import moment from 'moment';
 import styled from 'styled-components';
-import { lighten } from 'polished';
-import {
-    Segment, Label, Header, Flag,
-} from 'semantic-ui-react';
+
+import { Segment, Label, Header } from 'semantic-ui-react';
 
 import WeatherIcons from '../WeatherIcons';
 import Degree from './Degree';
@@ -29,7 +27,7 @@ const StyledSegment = styled(Segment)`
 
 const StyledWeatherIcon = styled(WeatherIcons)`
     font-size: 2rem;
-    margin-top: 2px;
+    margin-top: 4px;
 `;
 
 const TempContainer = styled.div`
@@ -65,7 +63,8 @@ const RightCol = styled.div`
 const CardHeader = ({
     data: {
         dt,
-        icon,
+        isDayTime,
+        iconID,
         city,
         country,
         description,
@@ -73,25 +72,24 @@ const CardHeader = ({
     },
 }) => (
     <StyledSegment>
-        <div>
-            <Header>
-                { city },&nbsp;{ country }
-                <Header.Subheader>
-                    <Description>{ description }</Description>
-                </Header.Subheader>
-            </Header>
-
-        </div>
+        <Header>
+            { city },&nbsp;{ country }
+            <Header.Subheader>
+                <Description>{ description }</Description>
+            </Header.Subheader>
+        </Header>
 
         <RightCol>
             <TempContainer>
-                <StyledWeatherIcon {...icon} />
+                <StyledWeatherIcon id={iconID} isDayTime={isDayTime} />
                 <Temp>{ temp }</Temp>
                 <Degree />
             </TempContainer>
+
             <Time
                 size="small"
-                color="grey"
+                icon="clock"
+                color={isDayTime ? 'yellow' : 'grey'}
                 content={dt.format('h:mm a')}
                 detail={dt.format('ddd')}
             />

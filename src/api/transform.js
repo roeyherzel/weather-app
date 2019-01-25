@@ -16,13 +16,17 @@ export const transformCurrentWeather = ({
     coord,
     sys: {
         country,
+        sunrise,
+        sunset,
     },
     main: {
         temp,
     },
 }) => {
     const {
-        id, icon, main, description,
+        id: iconID,
+        main,
+        description,
     } = weather[0];
 
     const { lat, lon } = coord;
@@ -35,14 +39,12 @@ export const transformCurrentWeather = ({
         coord,
         main,
         description,
+        iconID,
         temp: Math.round(temp),
         tz,
-        dt: moment.tz(tz),
         lastUpdate: moment.unix(dt).tz(tz), // timestamp
-        icon: {
-            id,
-            period: getIconPeriod(icon),
-        },
+        sunrise: moment.unix(sunrise).tz(tz),
+        sunset: moment.unix(sunset).tz(tz),
     });
 };
 

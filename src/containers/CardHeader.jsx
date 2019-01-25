@@ -21,11 +21,17 @@ export default compose(
     }),
     mapProps(({
         timestamp,
-        data: { tz, ...data },
+        data: {
+            tz,
+            sunrise,
+            sunset,
+            ...data
+        },
     }) => ({
         data: {
             ...data,
             dt: moment(timestamp).tz(tz),
+            isDayTime: moment(timestamp).tz(tz).isBetween(sunrise, sunset),
         },
     })),
 )(CardHeader);

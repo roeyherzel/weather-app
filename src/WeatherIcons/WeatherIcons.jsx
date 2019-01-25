@@ -4,10 +4,7 @@ import './css/weather-icons.min.css';
 const prefixClass = 'wi wi-owm';
 
 const Icon = styled.i.attrs({
-    className: ({ period, id }) => {
-        const iconClass = period ? `${period}-${id}` : id;
-        return `${prefixClass}-${iconClass}`;
-    },
+    className: ({ id, isDayTime }) => `${prefixClass}-${isDayTime ? 'day' : 'night'}-${id}`,
 })`
     && {
         line-height: 1;

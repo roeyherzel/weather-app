@@ -61,9 +61,9 @@ const withAppState = withStateHandlers(() => {
 
 const withAppContext = withContext({
     units: oneOf(['metric', 'imperial']),
-    handleChangeUnits: func,
-    myCities: arrayOf(number),
-    timestamp: number,
+    handleChangeUnits: func, // TODO: needed?
+    myCities: arrayOf(number), // TODO: needed?
+    timestamp: number, // TODO: move to withTimeTick
 }, ({
     timestamp, units, handleChangeUnits, myCities,
 }) => ({
