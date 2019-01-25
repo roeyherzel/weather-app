@@ -18,6 +18,12 @@ const Page = styled.div`
     `};
 `;
 
+const StyledSegment = styled(Segment)`
+    && {
+        min-height: 4rem;
+    }
+`;
+
 
 const Weather = ({
     isAdding,
@@ -30,12 +36,12 @@ const Weather = ({
             textAlign="center"
             content="WeatherZ"
         />
-        <Segment attached>
+        <StyledSegment attached>
             { isAdding
                 ? <AddCity {...rest} />
                 : <Cities {...rest} />
             }
-        </Segment>
+        </StyledSegment>
     </Page>
 );
 

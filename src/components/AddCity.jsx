@@ -6,7 +6,7 @@ import {
 import { Button } from 'semantic-ui-react';
 
 import Search from './Search';
-import CardHeader from './CardHeader';
+import Card from './Card';
 import { List, Item } from './common';
 
 
@@ -28,7 +28,7 @@ const AddCity = ({
                             icon="add"
                             onClick={() => handleAddCity(cityID)}
                         />
-                        <CardHeader data={data} />
+                        <Card data={data} />
                     </Item>
                 )) }
             </List>

@@ -1,10 +1,9 @@
 import React from 'react';
 import {
-    shape,
     instanceOf,
     string,
     number,
-    oneOf,
+    bool,
 } from 'prop-types';
 import moment from 'moment';
 import styled from 'styled-components';
@@ -60,16 +59,14 @@ const RightCol = styled.div`
     align-items: flex-end;
 `;
 
-const CardHeader = ({
-    data: {
-        dt,
-        isDayTime,
-        iconID,
-        city,
-        country,
-        description,
-        temp,
-    },
+const Card = ({
+    dt,
+    isDayTime,
+    iconID,
+    city,
+    country,
+    description,
+    temp,
 }) => (
     <StyledSegment>
         <Header>
@@ -97,18 +94,14 @@ const CardHeader = ({
     </StyledSegment>
 );
 
-CardHeader.propTypes = {
-    data: shape({
-        dt: instanceOf(moment).isRequired,
-        city: string.isRequired,
-        country: string.isRequired,
-        icon: shape({
-            id: number.isRequired,
-            period: oneOf(['day', 'night', null]),
-        }),
-        main: string.isRequired,
-        temp: number.isRequired,
-    }).isRequired,
+Card.propTypes = {
+    dt: instanceOf(moment).isRequired,
+    isDayTime: bool.isRequired,
+    city: string.isRequired,
+    country: string.isRequired,
+    description: string.isRequired,
+    iconID: number.isRequired,
+    temp: number.isRequired,
 };
 
-export default CardHeader;
+export default Card;

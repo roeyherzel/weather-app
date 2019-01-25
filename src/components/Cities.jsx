@@ -6,7 +6,7 @@ import {
 import { Button } from 'semantic-ui-react';
 
 import ActionBar from './ActionBar';
-import CardHeader from '../containers/CardHeader';
+import Card from '../containers/Card';
 import { List, Item } from './common';
 
 
@@ -31,7 +31,7 @@ const Cities = ({
                             />
                         )
                     }
-                    <CardHeader data={data} />
+                    <Card data={data} />
                 </Item>
             )) }
         </List>

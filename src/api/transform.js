@@ -2,12 +2,6 @@ import moment from 'moment-timezone';
 import tzlookup from 'tz-lookup';
 
 
-const getIconPeriod = (icon) => {
-    if (icon.endsWith('n')) return 'night';
-    if (icon.endsWith('d')) return 'day';
-    return null;
-};
-
 export const transformCurrentWeather = ({
     id: cityID,
     name: city,

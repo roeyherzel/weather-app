@@ -17,7 +17,7 @@ import Spinner from '../components/Spinner';
 const withLoadingState = withState('isLoading', 'setLoading', true);
 
 const withFetchHandler = withHandlers({
-    handleFetch: ({
+    fetchWeather: ({
         units,
         myCities,
         setLoading,
@@ -40,12 +40,12 @@ const withFetchHandler = withHandlers({
 
 const withLifecycle = lifecycle({
     componentDidMount() {
-        this.props.handleFetch();
+        this.props.fetchWeather();
     },
 
     componentDidUpdate(prevProps) {
         if (this.props.units !== prevProps.units) {
-            this.props.handleFetch();
+            this.props.fetchWeather();
         }
     },
 });

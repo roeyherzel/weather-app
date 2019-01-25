@@ -7,7 +7,7 @@ import {
 import { number, shape, string } from 'prop-types';
 import moment from 'moment-timezone';
 
-import CardHeader from '../components/CardHeader';
+import Card from '../components/Card';
 
 
 export default compose(
@@ -28,10 +28,8 @@ export default compose(
             ...data
         },
     }) => ({
-        data: {
-            ...data,
-            dt: moment(timestamp).tz(tz),
-            isDayTime: moment(timestamp).tz(tz).isBetween(sunrise, sunset),
-        },
+        ...data,
+        dt: moment(timestamp).tz(tz),
+        isDayTime: moment(timestamp).tz(tz).isBetween(sunrise, sunset),
     })),
-)(CardHeader);
+)(Card);
