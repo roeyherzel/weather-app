@@ -9,7 +9,9 @@ import {
 import moment from 'moment';
 import styled from 'styled-components';
 import { lighten } from 'polished';
-import { Segment, Label, Header } from 'semantic-ui-react';
+import {
+    Segment, Label, Header, Flag,
+} from 'semantic-ui-react';
 
 import WeatherIcons from '../WeatherIcons';
 import Degree from './Degree';
@@ -50,8 +52,7 @@ const Description = styled.span`
 
 const Time = styled(Label)`
     && {
-        text-transform: uppercase;
-        margin-top: 2px;
+        margin-top: 10px;
     }
 `;
 
@@ -79,6 +80,7 @@ const CardHeader = ({
                     <Description>{ description }</Description>
                 </Header.Subheader>
             </Header>
+
         </div>
 
         <RightCol>
@@ -87,7 +89,12 @@ const CardHeader = ({
                 <Temp>{ temp }</Temp>
                 <Degree />
             </TempContainer>
-            <Time color="black" size="small">{ dt.format('ddd | h:mm a') }</Time>
+            <Time
+                size="small"
+                color="grey"
+                content={dt.format('h:mm a')}
+                detail={dt.format('ddd')}
+            />
         </RightCol>
     </StyledSegment>
 );
