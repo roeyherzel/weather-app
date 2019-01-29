@@ -62,12 +62,11 @@ const withAppState = withStateHandlers(() => {
 const withAppContext = withContext({
     units: oneOf(['metric', 'imperial']),
     handleChangeUnits: func, // TODO: needed?
-    myCities: arrayOf(number), // TODO: needed?
     timestamp: number, // TODO: move to withTimeTick
 }, ({
-    timestamp, units, handleChangeUnits, myCities,
+    timestamp, units, handleChangeUnits,
 }) => ({
-    timestamp, units, handleChangeUnits, myCities,
+    timestamp, units, handleChangeUnits,
 }));
 
 // FIXME: hack to tie myCitiesData to myCities. makes city unmount on removeCity

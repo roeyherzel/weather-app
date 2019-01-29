@@ -8,55 +8,49 @@ import {
 import moment from 'moment';
 import styled from 'styled-components';
 
-import { Segment, Label, Header } from 'semantic-ui-react';
+import {
+    Segment, Label, Header, Statistic, Icon,
+} from 'semantic-ui-react';
 
 import WeatherIcons from '../WeatherIcons';
 import Degree from './Degree';
 
 
+const Container = styled.div`
+    display: flex;
+    justify-content: space-between;
+`;
+
 const StyledSegment = styled(Segment)`
+    width: 100%;
+`;
+
+const StyledStatistic = styled(Statistic)`
     && {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        width: 100%;
-        margin-top: 0;
+        margin: 0;
     }
 `;
 
 const StyledWeatherIcon = styled(WeatherIcons)`
-    font-size: 2rem;
-    margin-top: 4px;
-`;
-
-const TempContainer = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 2px;
-`;
-
-const Temp = styled.span`
-    font-size: 3.5rem;
-    font-weight: 100;
-    line-height: 1;
-    letter-spacing: -4px;
-    margin: 0 4px;
+    font-size: 2em;
+    margin-top: 6px;
+    margin-right: 4px;
 `;
 
 const Description = styled.span`
     text-transform: capitalize;
 `;
 
-const Time = styled(Label)`
-    && {
-        margin-top: 10px;
-    }
+const LabelContainer = styled.div`
+    display: flex;
+    margin-top: 1rem;
 `;
 
-const RightCol = styled.div`
+const WeatherContainer = styled.div`
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    flex-direction: row;
+    margin: 0;
+    margin-top: -5px;
 `;
 
 const Card = ({
@@ -68,29 +62,35 @@ const Card = ({
     description,
     temp,
 }) => (
-    <StyledSegment>
-        <Header>
-            { city },&nbsp;{ country }
-            <Header.Subheader>
-                <Description>{ description }</Description>
-            </Header.Subheader>
-        </Header>
+    <StyledSegment padded>
+        <Container>
+            <Header size="large">
+                { city },&nbsp;{ country }
+                <Header.Subheader>
+                    <Description>{ description }</Description>
+                </Header.Subheader>
+            </Header>
 
-        <RightCol>
-            <TempContainer>
+            <WeatherContainer>
                 <StyledWeatherIcon id={iconID} isDayTime={isDayTime} />
-                <Temp>{ temp }</Temp>
-                <Degree />
-            </TempContainer>
 
-            <Time
+                <StyledStatistic>
+                    <Statistic.Value>
+                        <Degree>{ temp }</Degree>
+                    </Statistic.Value>
+                </StyledStatistic>
+            </WeatherContainer>
+        </Container>
+
+        <LabelContainer>
+            <Label
                 size="small"
                 icon="clock"
-                color={isDayTime ? 'yellow' : 'grey'}
+                color={isDayTime ? undefined : 'grey'}
                 content={dt.format('h:mm a')}
                 detail={dt.format('ddd')}
             />
-        </RightCol>
+        </LabelContainer>
     </StyledSegment>
 );
 
