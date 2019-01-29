@@ -25,16 +25,10 @@ const StyledSegment = styled(Segment)`
     width: 100%;
 `;
 
-const StyledStatistic = styled(Statistic)`
-    && {
-        margin: 0;
-    }
-`;
-
-const StyledValue = styled(Statistic.Value)`
-    && {
-        letter-spacing: -2px;
-    }
+const Temp = styled.div`
+    font-size: 3.5rem;
+    letter-spacing: -2px;
+    line-height: 1;
 `;
 
 const StyledWeatherIcon = styled(WeatherIcons)`
@@ -49,7 +43,8 @@ const Description = styled.span`
 
 const LabelContainer = styled.div`
     display: flex;
-    margin-top: 4px;
+    justify-content: flex-end;
+    margin-top: 8px;
 `;
 
 const WeatherContainer = styled.div`
@@ -70,21 +65,20 @@ const Card = ({
 }) => (
     <StyledSegment padded>
         <Container>
-            <Header size="large">
-                { city },&nbsp;{ country }
-                <Header.Subheader>
-                    <Description>{ description }</Description>
-                </Header.Subheader>
-            </Header>
+            <div>
+                <Header size="large">
+                    { city },&nbsp;{ country }
+                    <Header.Subheader>
+                        <Description>{ description }</Description>
+                    </Header.Subheader>
+                </Header>
+            </div>
 
             <WeatherContainer>
                 <StyledWeatherIcon id={iconID} isDayTime={isDayTime} />
-
-                <StyledStatistic>
-                    <StyledValue>
-                        <Degree>{ temp }</Degree>
-                    </StyledValue>
-                </StyledStatistic>
+                <Temp>
+                    <Degree>{ temp }</Degree>
+                </Temp>
             </WeatherContainer>
         </Container>
 
@@ -92,7 +86,7 @@ const Card = ({
             <Label
                 size="small"
                 icon="clock"
-                color={isDayTime ? undefined : 'grey'}
+                color={isDayTime ? 'yellow' : undefined}
                 content={dt.format('h:mm a')}
                 detail={dt.format('ddd')}
             />
