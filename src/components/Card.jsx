@@ -31,6 +31,12 @@ const StyledStatistic = styled(Statistic)`
     }
 `;
 
+const StyledValue = styled(Statistic.Value)`
+    && {
+        letter-spacing: -2px;
+    }
+`;
+
 const StyledWeatherIcon = styled(WeatherIcons)`
     font-size: 2em;
     margin-top: 6px;
@@ -43,7 +49,7 @@ const Description = styled.span`
 
 const LabelContainer = styled.div`
     display: flex;
-    margin-top: 1rem;
+    margin-top: 4px;
 `;
 
 const WeatherContainer = styled.div`
@@ -75,9 +81,9 @@ const Card = ({
                 <StyledWeatherIcon id={iconID} isDayTime={isDayTime} />
 
                 <StyledStatistic>
-                    <Statistic.Value>
+                    <StyledValue>
                         <Degree>{ temp }</Degree>
-                    </Statistic.Value>
+                    </StyledValue>
                 </StyledStatistic>
             </WeatherContainer>
         </Container>

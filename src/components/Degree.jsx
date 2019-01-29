@@ -9,6 +9,7 @@ const unitType = oneOf(['metric', 'imperial']);
 const DegContainer = styled.span`
     font-size: 0.25em;
     line-height: 1em;
+    letter-spacing: initial;
     margin-top: 0.5em;
 `;
 
