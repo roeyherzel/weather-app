@@ -9,7 +9,7 @@ import moment from 'moment';
 import styled from 'styled-components';
 
 import {
-    Segment, Label, Header, Statistic, Icon,
+    Segment, Label, Header, Icon,
 } from 'semantic-ui-react';
 
 import WeatherIcons from '../WeatherIcons';
@@ -19,10 +19,12 @@ import Degree from './Degree';
 const Container = styled.div`
     display: flex;
     justify-content: space-between;
+    padding-bottom: 12px;
 `;
 
 const StyledSegment = styled(Segment)`
     width: 100%;
+    margin-top: 0;
 `;
 
 const Temp = styled.div`
@@ -44,7 +46,7 @@ const Description = styled.span`
 const LabelContainer = styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-top: 8px;
+    margin-top: 1rem;
 `;
 
 const WeatherContainer = styled.div`
@@ -66,7 +68,7 @@ const Card = ({
     <StyledSegment padded>
         <Container>
             <div>
-                <Header size="large">
+                <Header>
                     { city },&nbsp;{ country }
                     <Header.Subheader>
                         <Description>{ description }</Description>
@@ -83,13 +85,11 @@ const Card = ({
         </Container>
 
         <LabelContainer>
-            <Label
-                size="small"
-                icon="clock"
-                color={isDayTime ? 'yellow' : undefined}
-                content={dt.format('h:mm a')}
-                detail={dt.format('ddd')}
-            />
+            <Label attached="bottom left">
+                <Icon name="clock" color={isDayTime ? 'pink' : 'black'} />
+                { dt.format('h:mm a') }
+                <Label.Detail>{ dt.format('ddd') }</Label.Detail>
+            </Label>
         </LabelContainer>
     </StyledSegment>
 );
